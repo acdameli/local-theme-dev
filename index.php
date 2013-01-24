@@ -36,6 +36,11 @@ $accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0
 foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between themes quickly
 {
 	$accountOptionsHTML .= '<option value="' . $account->item->id . '" ' . ( $accountToUse == $account->item->id ? 'selected' : '' ) . '>' . $account->item->name . '</option>';
+	
+	if ( $accountToUse == $account->item->id )
+	{
+		$accountName = $account->item->stagebloc_url;
+	}
 }
 $accountOptionsHTML .= '</select>';
 
@@ -80,6 +85,9 @@ try
 		$renderedTheme = str_replace('</head>', '<script>' . file_get_contents('themes/' . $themeToUse . '/javascript.js') . '</script></head>', $renderedTheme);
 	}
 	
+	// Change all the anchor tags to render through our API
+	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountName . '\/)#', 'href="?url=', $renderedTheme);
+	
 	$console = <<<CONSOLE
 	<div id="console">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -95,18 +103,6 @@ try
 				$('#account').change(function() {
 					$.cookie('account', $(this).val(), {expires: 30}); // Store this account as the one to use
 					window.location = 'change_accounts.php?account_id=' + $(this).val();
-				});
-				
-				$('a').click(function() {
-					var uri = $(this).attr('href');
-					uri = uri.substring(uri.indexOf('.')).substring(uri.indexOf('/') + 1);
-					uri = uri.substring(uri.indexOf('/', 1) + 1); // Get the part of the URL after the domain, etc
-					if (document.URL.indexOf('?') != -1) {
-						window.location = document.URL.substring(0, document.URL.lastIndexOf('?')) + '?url=' + uri;
-					} else {
-						window.location = document.URL.substring(0, document.URL.lastIndexOf('/') + 1) + '?url=' + uri;
-					}
-					return false;
 				});
 			});
 		</script>
