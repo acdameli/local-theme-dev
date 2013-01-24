@@ -1,0 +1,420 @@
+/*
+ * Theme: Min
+*/
+
+
+/* HTML5 Doctor CSS Reset - http://html5doctor.com/html-5-reset-stylesheet/ */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {
+	margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+
+body{line-height:1}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+
+footer{width: 600px;}
+
+span.footer-info{float:right;}
+
+#main-content .post footer .footer-info a {color:#009be3;}
+
+#main-content .post footer .footer-info a:hover { color: #0076ad; }
+
+nav ul{list-style:none}
+
+blockquote,q{quotes:none}
+
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+
+ins{background-color:#ff9;color:#000;text-decoration:none}
+
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+
+del{text-decoration:line-through}
+
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+
+table{border-collapse:collapse;border-spacing:0}
+
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+
+input,select{vertical-align:middle}
+
+
+
+/* ANNNDDD BLAST OFF */
+body {
+	background: #fff;
+	color: #2b2b2b;
+	font: 14px Arial, sans-serif;
+}
+
+a {
+	color: #3b3b3b;
+	text-decoration: underline;
+}
+a:hover { color: #1a1a1a; }
+a:focus { outline: none; color: #000; }
+
+#masthead {
+	padding: 60px 0 36px;
+}
+
+#masthead h1 { text-align: center; }
+#masthead h1 a {
+	text-decoration: none;
+	font-size: 52px;
+	line-height: 62px;
+	color: #000;
+}
+#masthead h1 a:hover { box-shadow: inset 0 -6px 0 0 #000; }
+
+#main-nav { text-align: center;}
+#main-nav ol { display: inline-block; margin: 2px 0; }
+#main-nav ol li {
+	margin: 0 8px 7px;
+	display: block;
+	float: left;
+	font-size: 18px;
+	color: #444;
+}
+#main-nav ol li a {
+	display: inline-block;
+	padding: 10px 10px 3px;
+	text-decoration: none;
+	font-weight: normal;
+	text-transform: lowercase;
+}
+#main-nav ol li a:hover { color: #000;}
+#main-nav .active a { border-bottom: 2px solid #666; }
+
+#content {
+	margin: 40px auto 60px;
+	width: 560px;
+}
+
+p, article li {
+	text-align: justify;
+	margin-top: 14px;
+	font-size: 13px;
+	line-height: 1.65em;
+}
+
+
+article.post {
+	position: relative;
+	margin: 0 0 100px;
+	word-wrap: break-word;
+}
+
+#content h1,
+#content h1 a {
+	color: #1a1a1a;
+	font-size: 28px;
+	text-decoration: none;
+}
+#content h1:hover a { color: #000; text-decoration: underline;}
+
+.post img {
+	max-width: 560px;
+}
+
+.post-date {
+	display: block;
+	text-align: center;
+	margin: 0 0 25px;
+	text-decoration: none;
+	font: 15px/15px Georgia, serif;
+	text-transform: uppercase;
+}
+
+.post-date:before, .post-date:after {
+	font: bold 15px Arial, sans-serif;
+	content: "\2014\2014\2014";
+	color: #ccc;
+}
+
+.post .repost {
+	color: #5C5C5C;
+	font-style: italic;
+}
+
+.post.status .repost {
+	text-align: right;
+	margin: 5px 0 0;
+	font-size: 14px;
+}
+.post.status .repost a {
+	color: #3b3b3b;
+	text-decoration: underline;
+	border: 0;
+	display: inline;
+	padding: 0;
+}
+.post.status .repost a:hover { color: #1a1a1a; }
+
+.post .read-more {
+	display: block;
+	text-align: center;
+	margin: 10px 0 -5px;
+	padding: 10px 0;
+	text-decoration: none;
+	border-top: 1px dashed #ccc;
+	border-bottom: 2px solid transparent;
+}
+
+.post .read-more:hover {
+	background: #eee;
+	border-top-color: transparent;
+	border-bottom-color: #ccc;
+}
+
+.post.status { font-size: 26px; }
+.post.status a {
+	border-bottom: 2px solid transparent;
+	color: #1a1a1a;
+	display: block;
+	padding: 15px;
+	text-decoration: none;
+}
+.post.status a:hover { border-color: #ccc; color: #000; background: #eee; }
+
+#pagination { text-align: center; }
+#pagination a {
+	display: inline-block;
+	background: #eee;
+	text-align: center;
+	margin: 0 25px;
+	font-size: 16px;
+	text-transform: lowercase;
+	padding: 8px 0;
+	width: 150px;
+	text-decoration: none;
+}
+#pagination a:hover { background: #e1e1e1; color: #1a1a1a; text-shadow: 0 -1px 0 #fff; }
+#pagination a:active { background: #ccc; color: #000; }
+
+
+
+
+/* Events */
+#events-container h1 { float: left; margin-bottom: 20px; }
+#other-events {
+	float: right;
+	line-height: 40px;
+	text-align: right;
+}
+.events-list { clear: both; }
+.events-list li {
+	list-style-type: none;
+	padding: 10px;
+	cursor: pointer;
+}
+.events-list li:nth-child(even) {
+	background-color: #f1f1f1;
+}
+.events-list li:hover {
+	background: #f7f7f7;
+	color: #1a1a1a;
+}
+.events-list .event-date {
+	display: inline-block;
+	width: 50px;
+	padding-right: 10px;
+}
+.events-list .event-venue {
+	display: inline-block;
+	width: 200px;
+	padding-right: 10px;
+}
+.events-list .event-location {
+	display: inline-block;
+	width: 140px;
+	padding-right: 10px;
+}
+.events-list .event-actions {
+	display: none;
+	width: 85px;
+	text-align: right;
+}
+.events-list li:hover .event-actions {
+	display: inline-block;
+}
+.events-list .event-actions a {
+	display: inline-block;
+	width: 40px;
+	text-decoration: none;
+}
+
+/* Events listing in posts */
+.event .post-body {
+	font-size: 16px;
+}
+.post .events-list {
+	padding: 15px 0 0;
+	font-size: 14px;
+}
+.post .events-list small {
+	font-size: 12px;
+}
+.post .events-list .event-actions {
+	float: right;
+}
+.post .events-list .event-actions a {
+	display: inline;
+	width: auto;
+}
+
+/* Event View */
+#event .event-info { list-style: none; }
+#event .event-info li {
+	border-bottom: 1px solid #e1e1e1;
+}
+#event .event-info li:first-child {
+	border-top: 1px solid #e1e1e1;
+}
+#event .event-info .left {
+	padding: 10px 0 10px 12px;
+	width: 110px;
+	float: left;
+}
+#event .event-info .right {
+	border-left: 1px solid #e6e6e6;
+	margin-left: 110px;
+	padding: 10px 12px 10px 0;
+}
+
+#event #event-description p {
+	font-size: 16px;
+	padding: 0 125px;
+}
+
+/* About Section */
+#about-account .left { width: 250px; float: left; text-align: center; }
+#about-account .right { margin-left: 260px; }
+
+#account-links { clear: both; list-style-type: none; padding: 40px 0 0; text-align: center; }
+#account-links li { display: inline-block; font-size: 16px; margin: 0 2px; }
+#account-links li a {
+	display: inline-block;
+	padding: 4px 6px;
+	text-decoration: none;
+	font-weight: normal;
+}
+#account-links li a:hover { color: #000;}
+
+
+
+
+
+/*
+ * Photos
+ */
+
+/* Photos List */
+header + .post-body .photos-list { margin-top: 14px; }
+.photos-list {
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.photos-list a {
+	float: left;
+	width: 80px;
+	height: 80px;
+}
+.photos-list img {
+	display: inline;
+	opacity: .9;
+}
+.photos-list a:hover img {
+	opacity: 1;
+}
+
+#photo-albums {
+	margin: 0 auto;
+}
+#photo-albums h1 { margin-bottom: 20px; }
+
+#photo-albums li {
+	list-style-type: none;
+	display: block;
+	clear: both;
+}
+#photo-albums li img {
+	display: block;
+	float: left;
+	opacity: .85;
+}
+#photo-albums li a { display: block; text-decoration: none; }
+
+#photo-albums span {
+	display: inline-block;
+	line-height: 14px;
+	padding: 14px 10px;
+}
+#photo-albums span.total {
+	float: right;
+	color: #3b3b3b;
+	opacity: .25;
+}
+#photo-albums li:nth-child(even) { background-color: #f7f7f7; }
+#photo-albums li:hover { background-color: #f1f1f1; }
+#photo-albums li:hover img,
+#photo-albums li:hover span.total { opacity: 1; }
+
+/* Photo View */
+#photo-image {
+	display: block;
+	margin: 20px auto;
+	max-width: 560px;
+	width: auto !important;
+	width: 560px;
+}
+#photo-title {
+	display: inline;
+}
+#photo-backtoalbum {
+	display: inline-block;
+	margin: 0;
+	padding-left: 5px;
+}
+#photo-description {
+	margin: 14px 0;
+	word-wrap: break-word;
+}
+#photo-description,
+#photo-description p {
+	line-height: 1.65em;
+	font-size: 16px;
+}
+
+/* Photo Album View */
+#album-info {
+	position: relative;
+	overflow: hidden;
+}
+#album-cover {
+	float: left;
+	padding-right: 10px;
+}
+#album-title { height: 32px; overflow: hidden; }
+#album-description {
+	margin: 14px 0;
+	word-wrap: break-word;
+}
+#album-info div {
+	display: inline-block;
+}
+#album-description,
+#album-description p {
+	line-height: 1.65em;
+	font-size: 16px;
+}
+.nocontent {
+	clear: both;
+}
+.nocontent p {
+	text-align: center;
+	font-size: 18px;
+}

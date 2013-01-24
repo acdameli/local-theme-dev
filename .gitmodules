@@ -1,0 +1,3 @@
+[submodule "php-stagebloc-api"]
+	path = php-stagebloc-api
+	url = git@github.com:stagebloc/php-stagebloc-api.git
