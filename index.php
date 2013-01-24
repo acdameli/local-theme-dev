@@ -39,7 +39,7 @@ foreach ( $accounts as $account ) // Build a <select> drop down to use to switch
 	
 	if ( $accountToUse == $account->item->id )
 	{
-		$accountName = $account->item->stagebloc_url;
+		$accountUrl = $account->item->stagebloc_url;
 	}
 }
 $accountOptionsHTML .= '</select>';
@@ -86,7 +86,7 @@ try
 	}
 	
 	// Change all the anchor tags to render through our API
-	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountName . '\/)#', 'href="?url=', $renderedTheme);
+	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
 	
 	$console = <<<CONSOLE
 	<div id="console">
