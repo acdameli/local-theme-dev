@@ -56,68 +56,27 @@ foreach ( $themes as $theme ) // Build a <select> drop down to use to switch bet
 	}
 }
 $themeOptionsHTML .= '</select>';
+?>
 
-// Pass out theme data to the API to be rendered
-$postData = array(
-	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ),
-	'html' => file_get_contents('themes/' . $themeToUse . '/theme.sbt'),
-	'css' => file_get_contents('themes/' . $themeToUse . '/style.css')
-	
-	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive
-	// That being said, if your CSS has Option vars, you should pass it
-	//'css' => file_get_contents('themes/' . $themeToUse . '/style.css'),
-	//'js' => file_get_contents('themes/' . $themeToUse . '/javascript.js'),
-);
-
-try
-{
-	$renderedTheme = $stagebloc->post('theme/render', $postData);
-	
-	// If we didn't pass the CSS, we'll append it to the rendered theme
-	if ( ! isset($postData['css']) )
-	{
-		$renderedTheme = str_replace('</head>', '<style>' . file_get_contents('themes/' . $themeToUse . '/style.css') . '</style></head>', $renderedTheme);
-	}
-	
-	// If we didn't pass the JS, we'll append it to the rendered theme
-	if ( ! isset($postData['js']) )
-	{
-		$renderedTheme = str_replace('</head>', '<script>' . file_get_contents('themes/' . $themeToUse . '/javascript.js') . '</script></head>', $renderedTheme);
-	}
-	
-	// Change all the anchor tags to render through our API
-	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
-	
-	$console = <<<CONSOLE
-	<div id="console">
+<html>
+	<head>
+		<title>StageBloc Local Theme Development</title>
+		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 		<script src="assets/js/jquery.cookie.min.js"></script>
-		<script type="text/javascript">
-			$.noConflict(); // Don't want our small amount of code to interfere with any projects
-			jQuery(document).ready(function($) {
-				$('#theme').change(function() {
-					$.cookie('theme', $(this).val(), {expires: 30}); // Store this theme as the one to use
-					window.location = document.URL; // Refresh the page
-				});
-				
-				$('#account').change(function() {
-					$.cookie('account', $(this).val(), {expires: 30}); // Store this account as the one to use
-					window.location = 'change_accounts.php?account_id=' + $(this).val();
-				});
-			});
-		</script>
-		<form>
-			{$themeOptionsHTML}
-			{$accountOptionsHTML}
-		</form>
-	</div>
-CONSOLE;
+		<script src="assets/js/main.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+	</head>
 	
-	echo $console . $renderedTheme;
-}
-catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
-{
-	die($e->getHttpBody());
-}
-
-?>
+	<body>
+		<div id="console">			
+			<form>
+				<?php echo $themeOptionsHTML; ?>
+				<?php echo $accountOptionsHTML; ?>
+			</form>
+		</div>
+		
+		<iframe id="renderedTheme" src="theme_view.php"></iframe>
+	</body>
+</html>
