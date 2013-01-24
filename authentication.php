@@ -11,11 +11,11 @@ if ( isset($_GET['code']) )
 	{
 	    $accessToken = $stagebloc->accessToken($_GET['code']);	
 		echo 'Successfully authenticated! Your access token is ' . $accessToken['access_token'] . '<br/>' .
-				'<a href="request.php?accessToken=' . $accessToken['access_token'] . '">Try an example request</a>';
+				'Please place this in your config.php file.';
 	}
-	catch (Services_StageBloc_Invalid_Http_Response_Code_Exception $e)
+	catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 	{
-	    exit($e->getMessage());
+		die($e->getHttpBody());
 	}
 }
 else
