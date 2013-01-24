@@ -12,4 +12,9 @@ $accessToken = '<YOUR ACCESS TOKEN>';
 
 $inDevelopment = false;
 
+// Setup our StageBloc OAuth object
+$stagebloc = new Services_StageBloc($clientId, $clientSecret, $redirectUri, $inDevelopment);
+$stagebloc->setAccessToken($accessToken);
+$stagebloc->setResponseFormat('json');
+
 ?>

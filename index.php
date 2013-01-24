@@ -19,11 +19,6 @@ if ( strpos($accessToken, ' ') !== false )
 	exit;
 }
 
-// Setup our StageBloc OAuth object
-$stagebloc = new Services_StageBloc($clientId, $clientSecret, $redirectUri, $inDevelopment);
-$stagebloc->setAccessToken($accessToken);
-$stagebloc->setResponseFormat('json');
-
 // If the data file is empty, we haven't gotten any accounts yet
 // To force reloading of your accounts, simpley empty this file
 if ( ! file_exists('data.txt') || ! file_get_contents('data.txt') )
@@ -59,10 +54,12 @@ $themeOptionsHTML .= '</select>';
 
 // Pass out theme data to the API to be rendered
 $postData = array(
-	'url' => 'photos',
-	'html' => file_get_contents('themes/' . $themeToUse . '/theme.sbt')
+	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ),
+	'html' => file_get_contents('themes/' . $themeToUse . '/theme.sbt'),
+	'css' => file_get_contents('themes/' . $themeToUse . '/style.css')
 	
 	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive
+	// That being said, if your CSS has Option vars, you should pass it
 	//'css' => file_get_contents('themes/' . $themeToUse . '/style.css'),
 	//'js' => file_get_contents('themes/' . $themeToUse . '/javascript.js'),
 );
@@ -91,12 +88,25 @@ try
 			$.noConflict(); // Don't want our small amount of code to interfere with any projects
 			jQuery(document).ready(function($) {
 				$('#theme').change(function() {
-					jQuery.cookie('theme', $(this).val(), {expires: 30}); // Store this theme as the one to use
+					$.cookie('theme', $(this).val(), {expires: 30}); // Store this theme as the one to use
 					window.location = document.URL; // Refresh the page
 				});
 				
 				$('#account').change(function() {
-					jQuery.cookie('account', $(this).val(), {expires: 30}); // Store this account as the one to use
+					$.cookie('account', $(this).val(), {expires: 30}); // Store this account as the one to use
+					window.location = 'change_accounts.php?account_id=' + $(this).val();
+				});
+				
+				$('a').click(function() {
+					var uri = $(this).attr('href');
+					uri = uri.substring(uri.indexOf('.')).substring(uri.indexOf('/') + 1);
+					uri = uri.substring(uri.indexOf('/', 1) + 1); // Get the part of the URL after the domain, etc
+					if (document.URL.indexOf('?') != -1) {
+						window.location = document.URL.substring(0, document.URL.lastIndexOf('?')) + '?url=' + uri;
+					} else {
+						window.location = document.URL.substring(0, document.URL.lastIndexOf('/') + 1) + '?url=' + uri;
+					}
+					return false;
 				});
 			});
 		</script>
