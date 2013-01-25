@@ -73,7 +73,7 @@ $themeOptionsHTML .= '</select>';
 		<script src="assets/js/jquery.cookie.min.js"></script>
 		<script src="assets/js/main.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 	</head>
 
 	<body>
