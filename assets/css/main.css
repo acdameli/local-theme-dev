@@ -1,0 +1,64 @@
+/* HTML5 Doctor CSS Reset - http://html5doctor.com/html-5-reset-stylesheet/ */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}nav ul, nav ol{list-style:none}blockquote,q{quotes:none}quote:after,q:before,q:after{content:'';content:none}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+html, body {
+	font: 15px/50px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+#console {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background: url(http://stagebloc.com/images/backend/theme/navgradient.jpg);
+	color: #fff;
+	padding: 0 10px;
+}
+
+#console form { float: right; margin-right: 40px; }
+#console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+#console .docs {
+	display: block;
+	height: 50px;
+	float: left;
+	color: #686c6d;
+	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+	text-decoration: none;
+}
+#console:hover .docs { color: #ccc; }
+#console .docs:hover { color: #fff; }
+#console .docs i {
+	display: inline-block;
+	width: 42px;
+	height: 30px;
+	background: url(http://stagebloc.com/images/site/footer-sb.png) no-repeat;
+	margin: 0 10px 0 0;
+	vertical-align: middle;
+}
+
+#renderedTheme {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	height: -webkit-calc(100% - 50px);
+	height: calc(100% - 50px);
+	background: #fff;
+	box-shadow: 0 0 12px 4px rgba(0, 0, 0, .5)
+}
+
+#close {
+	display: block;
+	background: url(http://stagebloc.com/images/backend/theme/close.png);
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 18px;
+	right: 15px;
+}
+#close:hover {
+	background-position: 0 20px;
+}

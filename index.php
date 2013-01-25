@@ -1,5 +1,4 @@
 <?php
-
 require_once 'php-stagebloc-api/StageBloc.php';
 
 // Check to see if they've configured their application
@@ -36,7 +35,7 @@ $accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0
 foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between themes quickly
 {
 	$accountOptionsHTML .= '<option value="' . $account->item->id . '" ' . ( $accountToUse == $account->item->id ? 'selected' : '' ) . '>' . $account->item->name . '</option>';
-	
+
 	if ( $accountToUse == $account->item->id )
 	{
 		$accountUrl = $account->item->stagebloc_url;
@@ -61,22 +60,25 @@ $themeOptionsHTML .= '</select>';
 <html>
 	<head>
 		<title>StageBloc Local Theme Development</title>
-		
+
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 		<script src="assets/js/jquery.cookie.min.js"></script>
 		<script src="assets/js/main.js"></script>
-		
+
 		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
 	</head>
-	
+
 	<body>
-		<div id="console">			
+		<div id="console">
+			<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
 			<form>
 				<?php echo $themeOptionsHTML; ?>
 				<?php echo $accountOptionsHTML; ?>
 			</form>
 		</div>
-		
-		<iframe id="renderedTheme" src="theme_view.php"></iframe>
+
+		<a href="theme_view.php" id="close" title="Close this frame"></a>
+
+		<iframe id="renderedTheme" src="theme_view.php" frameborder="0"></iframe>
 	</body>
 </html>

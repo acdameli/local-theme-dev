@@ -9,7 +9,7 @@ if ( isset($_GET['code']) )
 {
 	try
 	{
-	    $accessToken = $stagebloc->accessToken($_GET['code']);	
+	    $accessToken = $stagebloc->accessToken($_GET['code']);
 		echo 'Successfully authenticated! Your access token is ' . $accessToken['access_token'] . '<br/>' .
 				'Please place this in your config.php file.';
 	}
