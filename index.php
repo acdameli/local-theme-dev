@@ -1,4 +1,12 @@
 <?php
+
+// If they got here from the authencation request, redirect them back there with the code
+if ( isset($_GET['code']) )
+{
+	header('Location: authentication.php?code=' . $_GET['code']);
+	exit;
+}
+
 require_once 'php-stagebloc-api/StageBloc.php';
 
 // Check to see if they've configured their application
@@ -12,7 +20,7 @@ else
 }
 
 // If there's not access token, go to the authentication page where one can be retreived
-if ( strpos($accessToken, ' ') !== false )
+if ( empty($accessToken) || strpos($accessToken, ' ') !== false )
 {
 	header('Location: authentication.php');
 	exit;
