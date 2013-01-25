@@ -13,7 +13,7 @@ else
 }
 
 // If there's not access token, go to the authentication page where one can be retreived
-if ( strpos($accessToken, ' ') !== false )
+if ( empty($accessToken) || strpos($accessToken, ' ') !== false )
 {
 	header('Location: authentication.php');
 	exit;
