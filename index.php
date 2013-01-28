@@ -69,11 +69,13 @@ $themeOptionsHTML .= '</select>';
 	<head>
 		<title>StageBloc Local Theme Development</title>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9/jquery.min.js"></script>
 		<script src="assets/js/jquery.cookie.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/main.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
 	</head>
 
 	<body>

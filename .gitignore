@@ -1,2 +1,7 @@
 config.php
 data.txt
+
+/.DS_Store
+/assets/.DS_Store
+/assets/css/.DS_Store
+/.gitignore
