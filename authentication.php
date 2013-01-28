@@ -40,13 +40,9 @@ else
 	</head>
 
 	<body id="authentication">
-		<div class="container">
-			<div class="row-fluid">
-				<div class="hero-unit span6 offset3">
-					<h2 class="center muted inset">Authentication</h2>
-					<?php echo $content; ?>
-				</div>
-			</div>
+		<div class="hero-unit notification">
+			<h2 class="center muted inset">Authentication</h2>
+			<?php echo $content; ?>
 		</div>
 	</body>
 </html>
