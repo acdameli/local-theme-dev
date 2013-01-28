@@ -22,7 +22,7 @@ if ( isset($_GET['code']) )
 else
 {
 	$authUrl = $stagebloc->getAuthorizeUrl(array('scope' => 'non-expiring'));
-	$content = '<a class="btn btn-large btn-primary" href="' . $authUrl . '">Connect With StageBloc</a>';
+	$content = '<p><a class="btn btn-large btn-block btn-primary" href="' . $authUrl . '">Connect With StageBloc</a></p>';
 }
 ?>
 <!DOCTYPE html>
@@ -41,9 +41,11 @@ else
 
 	<body id="authentication">
 		<div class="container">
-			<div class="hero-unit">
-				<h1>Authentication</h1>
-				<?php echo $content; ?>
+			<div class="row-fluid">
+				<div class="hero-unit span6 offset3">
+					<h2 class="center muted inset">Authentication</h2>
+					<?php echo $content; ?>
+				</div>
 			</div>
 		</div>
 	</body>
