@@ -40,27 +40,29 @@ if ( ! empty($_POST) ) // The user is attempting to login
 
 if ( ! $loginRequired )
 {
-	// If the data file is empty, we haven't gotten any accounts yet
-	// To force reloading of your accounts, simpley empty this file
-	if ( ! file_exists('data.txt') || ! file_get_contents('data.txt') )
+	// If the data var is null, we haven't gotten any acounts yet
+	// To force reloading of your accounts, simply reset this var to null
+	if ( $accountData === null )
 	{
 		$authorizedAccountsJSON = $stagebloc->post('accounts/list', array());
-		file_put_contents('data.txt', $authorizedAccountsJSON);
+		$code = file_get_contents('config.php');
+		$code = str_replace('null', '\'' . $authorizedAccountsJSON . '\'', $code);
+		file_put_contents('config.php', $code);
 	}
 
 	// We should always have accounts by now since we populated them if the data file was empty
-	$accounts = json_decode(file_get_contents('data.txt'));
+	$accounts = json_decode($accountData);
 	$accounts = $accounts->response->items;
 
 	$accountOptionsHTML = '<select name="account" id="account">';
 	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->item->id ); // Default to use the first account
 	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between themes quickly
 	{
-		$accountOptionsHTML .= '<option value="' . $account->item->id . '" ' . ( $accountToUse == $account->item->id ? 'selected' : '' ) . '>' . $account->item->name . '</option>';
+		$accountOptionsHTML .= '<option value="' . $account->id . '" ' . ( $accountToUse == $account->id ? 'selected' : '' ) . '>' . $account->name . '</option>';
 
-		if ( $accountToUse == $account->item->id )
+		if ( $accountToUse == $account->id )
 		{
-			$accountUrl = $account->item->stagebloc_url;
+			$accountUrl = $account->stagebloc_url;
 		}
 	}
 	$accountOptionsHTML .= '</select>';

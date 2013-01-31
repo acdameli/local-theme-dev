@@ -10,6 +10,9 @@ $redirectUri = 'http://localhost/localdev/authentication.php';
 // It will be placed here for you automatically once you login with your StageBloc credentials
 $accessToken = '<ACCESS TOKEN WILL BE INSERTED HERE>';
 
+// This will be populated for your automagically upon authentication
+$accountData = null;
+
 $inDevelopment = false;
 
 // Setup our StageBloc OAuth object
