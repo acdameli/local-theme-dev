@@ -6,26 +6,24 @@ We've developed quite an extensive theming engine at StageBloc. That being said,
 
 This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/stagebloc/php-stagebloc-api).
 
+## Requirements
+1. In order to use this for local theme development, you'll need a localhost set up capable of running PHP.
+
+2. You'll also need to [sign up for a StageBloc account](http://stagebloc.com/signup).
+
 ## Getting Started
 
-To be able to develop themes locally, you'll first need to [sign up for a StageBloc account](http://www.stagebloc.com/signup). If you've already done that, you'll need to [register an application](http://stagebloc.com/account/admin/management/developers/) in order to receive a client ID and secret.
-
-1. Once you've cloned the repo, run the following commands to get the resources for the [StageBloc PHP API Wrapper](https://github.com/stagebloc/php-stagebloc-api):
+1. Once you've cloned the repo, run the following commands from the project's root directory to get the resources for the [StageBloc PHP API Wrapper](https://github.com/stagebloc/php-stagebloc-api) and [Bender](https://github.com/stagebloc/bender):
 
 		git submodule init
 		git submodule update
 
-2. First, rename `config-sample.php` to `config.php` and fill in the client ID, client secret, and redirect URL from the application you created on your StageBloc account.
+2. Rename `config-sample.php` to `config.php` so that we can populate it with your access token upon authentication.
 
-3. Then, create a `data.txt` file in the root folder of the repo. This will hold various information used to switch between accounts.
-  
-4. Next, load `/authentication.php` in a browser and click the link to make a connection. Once you've logged into your StageBloc account, you'll be redirected back to your local code, and your auth token will appear. Paste this code into your `config.php` file.
-       
-5. That's it! You can edit your theme in your editor of choice. Simply refresh the `index` page of this repo to see updates.
+3. That's it! You can edit themes in your IDE / text editor of choice. Simply load the `index` page of this project in your browser to see your themes as you would with any localhost.
 
 ## General Information
-* **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector.
-
+* **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector. The `.sbt` extension is used for `HTML` files, meaning "StageBloc Theme".
 
 ## Feedback And Questions
 

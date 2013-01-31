@@ -9,7 +9,7 @@ if ( file_exists('config.php') )
 }
 else
 {
-	die('No config.php file found! Create an application on StageBloc, and then populate the config.php file.');
+	die('No config.php file found!');
 }
 
 if ( isset($_GET['account_id']) )
@@ -17,10 +17,6 @@ if ( isset($_GET['account_id']) )
 	$response = $stagebloc->post('oauth2/token/edit', array('account_id' => $_GET['account_id']));	
 	header('Location: index.php'); // Redirect back to the main page since out access token has been updated for a new account
 	exit;
-}
-else
-{
-	die('Failed');
 }
 
 ?>
