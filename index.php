@@ -1,3 +1,19 @@
+<!doctype html>
+<html>
+	<head>
+		<title>StageBloc Local Theme Development</title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script src="assets/js/jquery.cookie.min.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/bender/js/bender.js"></script>
+
+		<link rel="stylesheet" href="assets/bender/css/bender.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+
+	<body>
+
 <?php
 
 $loginRequired = false;
@@ -6,7 +22,7 @@ $loginRequired = false;
 if ( file_exists('config.php') )
 {
 	require_once 'config.php';
-	
+
 	if ( strpos($accessToken, ' ') !== false || empty($accessToken) )
 	{
 		$loginRequired = true;
@@ -92,20 +108,6 @@ if ( ! $loginRequired )
 }
 ?>
 
-<html>
-	<head>
-		<title>StageBloc Local Theme Development</title>
-
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-		<script src="assets/js/jquery.cookie.min.js"></script>
-		<script src="assets/js/main.js"></script>
-		<script src="assets/bender/js/bender.js"></script>
-				
-		<link rel="stylesheet" type="text/css" href="assets/bender/css/bender.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
-	</head>
-
-	<body>
 		<?php if ( ! file_exists('config.php') ): ?>
 			<div class="content">
 				<article>
@@ -114,15 +116,17 @@ if ( ! $loginRequired )
 				</article>
 			</div>
 		<?php elseif ( $loginRequired ): ?>
-			<header><h1><a href="" id="stagebloc-logo">StageBloc</a></h1></header>
-			
-			<form method="post" id="contact-form" autocomplete="off">
-				<fieldset>
-					<input class="input" type="text" id="email" name="email" placeholder="Email" required />
-					<input class="input" type="password" id="password" name="password" placeholder="Password" required />
-					<button type="submit" name="submit">Connect</button>
-				</fieldset>
-			</form>
+			<div class="content">
+				<header><h1><a href="" id="stagebloc-logo">StageBloc</a></h1></header>
+
+				<form method="post" autocomplete="off">
+					<fieldset>
+						<input class="input" type="text" id="email" name="email" placeholder="Email" required />
+						<input class="input" type="password" id="password" name="password" placeholder="Password" required />
+						<button type="submit" name="submit">Connect with StageBloc</button>
+					</fieldset>
+				</form>
+			</div>
 		<?php else: ?>
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
