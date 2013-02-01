@@ -26,42 +26,45 @@ if ( file_exists('config.php') )
 	if ( strpos($accessToken, ' ') !== false || empty($accessToken) )
 	{
 		$loginRequired = true;
+		
+		if ( ! empty($_POST) ) // The user is attempting to login
+		{
+			if ( isset($_POST['email']) && isset($_POST['password']) )
+			{
+				$params = array(
+					'client_id' => $clientId,
+					'client_secret' => $clientSecret,
+					'grant_type' => 'password',
+					'email' => $_POST['email'],
+					'password' => $_POST['password']
+				);
+
+				try
+				{
+					// Attempt to login with the given email and password
+					$response = $stagebloc->post('oauth2/token/index', $params);
+					$response = json_decode($response, true);
+					$accessToken = $response['access_token']; // Override the config var so that we can use it below right away
+					$stagebloc->setAccessToken($accessToken);
+					
+					// Put this access token in our config file to make requests with
+					$code = file_get_contents('config.php');
+					$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $accessToken, $code);
+					file_put_contents('config.php', $code);
+					$loginRequired = false;
+				}
+				catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
+				{
+					die($e->getHttpBody());
+				}
+			}
+		}
 	}
 }
 else
 {
 	// Include the StageBloc library if config.php isn't loaded (since it loads it as well)
 	require_once 'php-stagebloc-api/StageBloc.php';
-}
-
-if ( ! empty($_POST) ) // The user is attempting to login
-{
-	if ( isset($_POST['email']) && isset($_POST['password']) )
-	{
-		$params = array(
-			'client_id' => $clientId,
-			'client_secret' => $clientSecret,
-			'grant_type' => 'password',
-			'email' => $_POST['email'],
-			'password' => $_POST['password']
-		);
-		
-		try
-		{
-			// Attempt to login with the given email and password
-			$response = $stagebloc->post('oauth2/token/index', $params);
-			$response = json_decode($response, true);
-
-			// Put this access token in our config file to make requests with
-			$code = file_get_contents('config.php');
-			$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $response['access_token'], $code);
-			file_put_contents('config.php', $code);
-		}
-		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
-		{
-			die($e->getHttpBody());
-		}
-	}
 }
 
 if ( ! $loginRequired )
@@ -72,9 +75,9 @@ if ( ! $loginRequired )
 	{
 		try
 		{
-			$authorizedAccountsJSON = $stagebloc->post('accounts/list', array());
+			$accountData = $stagebloc->post('accounts/list', array());
 			$code = file_get_contents('config.php');
-			$code = str_replace('null', '\'' . $authorizedAccountsJSON . '\'', $code);
+			$code = str_replace('null', '\'' . $accountData . '\'', $code);
 			file_put_contents('config.php', $code);
 		}
 		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
