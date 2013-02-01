@@ -1,5 +1,5 @@
 <?php
-require_once 'php-stagebloc-api/StageBloc.php';
+
 require_once 'config.php'; // This will have to exist in the parent frame before this iFrame is loaded
 
 $accounts = json_decode($accountData);
@@ -22,13 +22,13 @@ $themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // 
 // Pass out theme data to the API to be rendered
 $postData = array(
 	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ),
-	'html' => file_get_contents('themes/' . $themeToUse . '/theme.sbt'),
-	'css' => file_get_contents('themes/' . $themeToUse . '/style.css')
+	'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt'),
+	'css' => file_get_contents($themePath . $themeToUse . '/style.css')
 
-	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive
-	// That being said, if your CSS has Option vars, you should pass it
-	//'css' => file_get_contents('themes/' . $themeToUse . '/style.css'),
-	//'js' => file_get_contents('themes/' . $themeToUse . '/javascript.js'),
+	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive from the API and save the bandwidth
+	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed
+	//'css' => file_get_contents($themePath . $themeToUse . '/style.css'),
+	//'js' => file_get_contents($themePath . $themeToUse . '/javascript.js'),
 );
 
 try

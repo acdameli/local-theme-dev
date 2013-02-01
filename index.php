@@ -2,9 +2,6 @@
 
 $loginRequired = false;
 
-// Include the StageBloc library
-require_once 'php-stagebloc-api/StageBloc.php';
-
 // Check to see if they've configured their application
 if ( file_exists('config.php') )
 {
@@ -14,6 +11,11 @@ if ( file_exists('config.php') )
 	{
 		$loginRequired = true;
 	}
+}
+else
+{
+	// Include the StageBloc library if config.php isn't loaded (since it loads it as well)
+	require_once 'php-stagebloc-api/StageBloc.php';
 }
 
 if ( ! empty($_POST) ) // The user is attempting to login
@@ -27,14 +29,22 @@ if ( ! empty($_POST) ) // The user is attempting to login
 			'email' => $_POST['email'],
 			'password' => $_POST['password']
 		);
-		$response = $stagebloc->post('oauth2/token/index', $params);
 		
-		$response = json_decode($response, true);
+		try
+		{
+			// Attempt to login with the given email and password
+			$response = $stagebloc->post('oauth2/token/index', $params);
+			$response = json_decode($response, true);
 
-		// Put this access token in our config file to make requests with
-		$code = file_get_contents('config.php');
-		$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $response['access_token'], $code);
-		file_put_contents('config.php', $code);
+			// Put this access token in our config file to make requests with
+			$code = file_get_contents('config.php');
+			$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $response['access_token'], $code);
+			file_put_contents('config.php', $code);
+		}
+		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
+		{
+			die($e->getHttpBody());
+		}
 	}
 }
 
@@ -116,9 +126,10 @@ if ( ! $loginRequired )
 		<?php else: ?>
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
-				<form>
+				<form method="post" action="submit_theme.php">
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
+					<input class="button" type="submit" value="Submit Theme" />
 				</form>
 			</div>
 
