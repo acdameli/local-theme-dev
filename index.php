@@ -155,6 +155,7 @@ if ( ! $loginRequired )
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
 				<form method="post" action="submit_theme.php" id="updateTheme">
+					<label for="mobile">Mobile</label><input type="checkbox" id="mobile" name="mobile" />
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
 					<input class="button" type="submit" value="Submit Theme" />

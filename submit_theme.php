@@ -10,7 +10,8 @@ if ( isset($_COOKIE['theme']) )
 	$postData = array(
 		'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt'),
 		'css' => file_get_contents($themePath . $themeToUse . '/style.css'),
-		'js' => file_get_contents($themePath . $themeToUse . '/javascript.js')
+		'js' => file_get_contents($themePath . $themeToUse . '/javascript.js'),
+		'mobile' => isset($_POST['mobile'])
 	);
 	
 	try

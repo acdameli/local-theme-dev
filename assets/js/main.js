@@ -18,6 +18,17 @@ $(function() {
 		});
 	});
 	
+	// Change the size of the iFrame for mobile vs non-mobile
+	$('#mobile').change(function() {
+		if ( ($(this).attr('checked')) ) {
+			$('#renderedTheme').css({
+									width: '640px' });
+		} else {
+			$('#renderedTheme').css({
+									width: '100%' });
+		}
+	})
+	
 	// Make sure the user actually wants to update their theme
 	$('#updateTheme').submit(function() {
 		return confirm('Are you sure you want to update your theme?');
