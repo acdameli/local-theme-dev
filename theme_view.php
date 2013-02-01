@@ -16,7 +16,7 @@ foreach ( $accounts as $account ) // Get the URL of the account we're currently 
 }
 
 // Find all of the available themes we have
-$themes = array_values(preg_grep('/^([^.])/', scandir('themes/'))); // Ignore hidden files
+$themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
 $themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // Default to use the first theme
 
 // Pass out theme data to the API to be rendered
@@ -38,13 +38,13 @@ try
 	// If we didn't pass the CSS, we'll append it to the rendered theme
 	if ( ! isset($postData['css']) )
 	{
-		$renderedTheme = str_replace('</head>', '<style>' . file_get_contents('themes/' . $themeToUse . '/style.css') . '</style></head>', $renderedTheme);
+		$renderedTheme = str_replace('</head>', '<style>' . file_get_contents($themePath . $themeToUse . '/style.css') . '</style></head>', $renderedTheme);
 	}
 
 	// If we didn't pass the JS, we'll append it to the rendered theme
 	if ( ! isset($postData['js']) )
 	{
-		$renderedTheme = str_replace('</head>', '<script>' . file_get_contents('themes/' . $themeToUse . '/javascript.js') . '</script></head>', $renderedTheme);
+		$renderedTheme = str_replace('</head>', '<script>' . file_get_contents($themePath . $themeToUse . '/javascript.js') . '</script></head>', $renderedTheme);
 	}
 
 	// Change all the anchor tags so links render through the API instead of elsewhere

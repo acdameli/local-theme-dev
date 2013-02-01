@@ -12,7 +12,7 @@
 }
 
 #console form { width: auto; float: right; margin: 0 40px 0 0; }
-#console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+#console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0 10px 0 0; }
 
 #console .docs {
 	display: block;
@@ -43,6 +43,12 @@
 	height: calc(100% - 50px);
 	background: #fff;
 	box-shadow: 0 0 12px 4px rgba(0, 0, 0, .5)
+}
+
+#renderedTheme.mobile {
+	left: 50%;
+	margin-left: -320px;
+	width: 640px;
 }
 
 #close {

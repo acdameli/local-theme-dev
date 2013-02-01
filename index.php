@@ -26,7 +26,7 @@ if ( file_exists('config.php') )
 	if ( strpos($accessToken, ' ') !== false || empty($accessToken) )
 	{
 		$loginRequired = true;
-		
+
 		if ( ! empty($_POST) ) // The user is attempting to login
 		{
 			if ( isset($_POST['email']) && isset($_POST['password']) )
@@ -46,7 +46,7 @@ if ( file_exists('config.php') )
 					$response = json_decode($response, true);
 					$accessToken = $response['access_token']; // Override the config var so that we can use it below right away
 					$stagebloc->setAccessToken($accessToken);
-					
+
 					// Put this access token in our config file to make requests with
 					$code = file_get_contents('config.php');
 					$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $accessToken, $code);
@@ -76,7 +76,7 @@ if ( ! $loginRequired )
 		try
 		{
 			$accountData = $stagebloc->post('accounts/list', array());
-			
+
 			// Set the original authenicated account to the one authenciated by the API endpoint
 			$accounts = json_decode($accountData);
 			$accounts = $accounts->response->items;
@@ -88,7 +88,7 @@ if ( ! $loginRequired )
 					setcookie('account', $account->id, time() + 60 * 60 * 24 * 30); // Expire in 30 days
 				}
 			}
-			
+
 			// Write this data to our config file so that we can read it later instead of retreiving it everytime
 			$code = file_get_contents('config.php');
 			$code = str_replace('null', '\'' . $accountData . '\'', $code);
@@ -118,16 +118,17 @@ if ( ! $loginRequired )
 	$accountOptionsHTML .= '</select>';
 
 	// Find all of the available themes we have
-	$themes = array_values(preg_grep('/^([^.])/', scandir('themes/'))); // Ignore hidden files
+	$themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
 	$themeOptionsHTML = '<select name="theme" id="theme">';
 	$themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // Default to use the first theme
 	foreach ( $themes as $theme ) // Build a <select> drop down to use to switch between themes quickly
 	{
-		if ( is_dir('themes/' . $theme) )
+		if ( is_dir($themePath . $theme) )
 		{
 			$themeOptionsHTML .= '<option value="' . $theme . '" ' . ( $themeToUse == $theme ? 'selected' : '' ) . '>' . $theme . '</option>';
 		}
 	}
+	$themeOptionsHTML .= '<option value="reset">{{ reset cookie }}</option>';
 	$themeOptionsHTML .= '</select>';
 }
 ?>
@@ -155,9 +156,12 @@ if ( ! $loginRequired )
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
 				<form method="post" action="submit_theme.php" id="updateTheme">
-					<label for="mobile">Mobile</label><input type="checkbox" id="mobile" name="mobile" />
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
+					<select id="mobile" name="mobile">
+						<option value="no">Desktop</option>
+						<option value="yes">Mobile</option>
+					</select>
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>
 			</div>
