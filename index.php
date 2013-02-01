@@ -118,12 +118,12 @@ if ( ! $loginRequired )
 	$accountOptionsHTML .= '</select>';
 
 	// Find all of the available themes we have
-	$themes = array_values(preg_grep('/^([^.])/', scandir('themes/'))); // Ignore hidden files
+	$themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
 	$themeOptionsHTML = '<select name="theme" id="theme">';
 	$themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // Default to use the first theme
 	foreach ( $themes as $theme ) // Build a <select> drop down to use to switch between themes quickly
 	{
-		if ( is_dir('themes/' . $theme) )
+		if ( is_dir($themePath . $theme) )
 		{
 			$themeOptionsHTML .= '<option value="' . $theme . '" ' . ( $themeToUse == $theme ? 'selected' : '' ) . '>' . $theme . '</option>';
 		}
