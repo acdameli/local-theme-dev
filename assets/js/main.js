@@ -17,4 +17,9 @@ $(function() {
 			}
 		});
 	});
+	
+	// Make sure the user actually wants to update their theme
+	$('#updateTheme').submit(function() {
+		return confirm('Are you sure you want to update your theme?');
+	});
 });
