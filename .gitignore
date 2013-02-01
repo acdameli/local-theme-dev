@@ -1,1 +1,12 @@
 config.php
+
+## IDE-specific files
+# NetBeans
+.buildpath
+.project
+nbproject/*
+*.sublime-*
+
+# Operating system-specific files
+.DS_Store
+Thumbs.db
