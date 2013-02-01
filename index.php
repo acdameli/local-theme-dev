@@ -159,8 +159,8 @@ if ( ! $loginRequired )
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
 					<select id="mobile" name="mobile">
-						<option value="no">Desktop</option>
-						<option value="yes">Mobile</option>
+						<option value="false">Desktop</option>
+						<option value="true">Mobile</option>
 					</select>
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>

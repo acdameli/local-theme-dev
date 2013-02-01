@@ -25,7 +25,7 @@ $(function()
 	// Change the size of the iFrame for mobile vs non-mobile
 	$('#mobile').change(function()
 	{
-		$('#renderedTheme').toggleClass('mobile', $(this).val() === 'yes');
+		$('#renderedTheme').toggleClass('mobile', $(this).val() === 'true');
 	})
 
 	// Make sure the user actually wants to update their theme
