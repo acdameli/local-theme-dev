@@ -1,5 +1,7 @@
 <?php
 
+require_once 'php-stagebloc-api/StageBloc.php';
+
 // These three pieces of information can be found be creating an Application on StageBloc
 // In this case, the application has already been created, and you just need to authenticate with it
 $clientId = '840c1d25a765312f1be2ec4a6167f0d8';
