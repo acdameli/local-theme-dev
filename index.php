@@ -70,10 +70,17 @@ if ( ! $loginRequired )
 	// To force reloading of your accounts, simply reset this var to null
 	if ( $accountData === null )
 	{
-		$authorizedAccountsJSON = $stagebloc->post('accounts/list', array());
-		$code = file_get_contents('config.php');
-		$code = str_replace('null', '\'' . $authorizedAccountsJSON . '\'', $code);
-		file_put_contents('config.php', $code);
+		try
+		{
+			$authorizedAccountsJSON = $stagebloc->post('accounts/list', array());
+			$code = file_get_contents('config.php');
+			$code = str_replace('null', '\'' . $authorizedAccountsJSON . '\'', $code);
+			file_put_contents('config.php', $code);
+		}
+		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
+		{
+			die($e->getHttpBody());
+		}
 	}
 
 	// We should always have accounts by now since we populated them if the data file was empty
