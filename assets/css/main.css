@@ -8,9 +8,10 @@
 	background: url(http://stagebloc.com/images/backend/theme/navgradient.jpg);
 	color: #fff;
 	padding: 0 10px;
+	line-height: 50px;
 }
 
-#console form { float: right; margin-right: 40px; }
+#console form { width: auto; float: right; margin: 0 40px 0 0; }
 #console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 #console .docs {
