@@ -76,6 +76,20 @@ if ( ! $loginRequired )
 		try
 		{
 			$accountData = $stagebloc->post('accounts/list', array());
+			
+			// Set the original authenicated account to the one authenciated by the API endpoint
+			$accounts = json_decode($accountData);
+			$accounts = $accounts->response->items;
+			foreach ( $accounts as $account )
+			{
+				if ( $account->authenticated )
+				{
+					$_COOKIE['account'] = $account->id; // Since COOKIEs aren't actually set until the next page load, manually set the data temporarily
+					setcookie('account', $account->id, time() + 60 * 60 * 24 * 30); // Expire in 30 days
+				}
+			}
+			
+			// Write this data to our config file so that we can read it later instead of retreiving it everytime
 			$code = file_get_contents('config.php');
 			$code = str_replace('null', '\'' . $accountData . '\'', $code);
 			file_put_contents('config.php', $code);
