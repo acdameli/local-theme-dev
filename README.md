@@ -18,7 +18,7 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 		git submodule init
 		git submodule update
 
-2. Rename `config-sample.php` to `config.php` and run 'chmod 777 config.php' so that we can populate it with your access token upon authentication and other data.
+2. Rename `config-sample.php` to `config.php` and run `chmod 777 config.php` so that we can populate it with your access token upon authentication and other data.
 
 3. That's it! You can edit themes in your IDE / text editor of choice. Simply load the `index` page of this project in your browser to see your themes as you would with any localhost.
 
