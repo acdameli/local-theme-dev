@@ -11,7 +11,7 @@ if ( isset($_COOKIE['theme']) )
 		'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt'),
 		'css' => file_get_contents($themePath . $themeToUse . '/style.css'),
 		'js' => file_get_contents($themePath . $themeToUse . '/javascript.js'),
-		'mobile' => filter_var($_POST['mobile']), FILTER_VALIDATE_BOOLEAN)
+		'mobile' => filter_var($_POST['mobile'], FILTER_VALIDATE_BOOLEAN)
 	);
 	
 	try
