@@ -55,7 +55,21 @@ try
 }
 catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 {
-	die($e->getHttpBody());
+	die($e->getMessage());
 }
 
 ?>
+
+<script>
+	$('a').click(function(e) {
+		var data = {
+			url: '//' + location.hostname + $(this).attr('href')
+		};
+
+		if ( history.pushState )
+		{
+			// Push the state of this to the parent so that refreshing the page loads the same page
+			parent.history.pushState(data, document.title, data.url);
+		}
+	});
+</script>

@@ -165,10 +165,9 @@ if ( ! $loginRequired )
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>
 			</div>
-
 			<a href="theme_view.php" id="close" title="Close this frame"></a>
 
-			<iframe id="renderedTheme" src="theme_view.php" frameborder="0"></iframe>
+			<iframe id="renderedTheme" src="theme_view.php<?php echo ( isset($_GET['url']) ? '?url=' . $_GET['url'] : '' ); ?>" frameborder="0"></iframe>
 		<?php endif; ?>
 	</body>
 </html>
