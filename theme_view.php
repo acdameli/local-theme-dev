@@ -61,15 +61,21 @@ catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 ?>
 
 <script>
-	$('a').click(function(e) {
-		var data = {
-			url: '//' + location.hostname + $(this).attr('href')
-		};
-
-		if ( history.pushState )
+	$(function()
+	{
+		if ( window.self !== window.top ) // Only push state if we're in the iFrame
 		{
-			// Push the state of this to the parent so that refreshing the page loads the same page
-			parent.history.pushState(data, document.title, data.url);
+			$('a').click(function(e) {
+				var data = {
+					url: '//' + location.hostname + $(this).attr('href')
+				};
+
+				if ( history.pushState )
+				{
+					// Push the state of this to the parent so that refreshing the page loads the same page
+					parent.history.pushState(data, document.title, data.url);
+				}
+			});
 		}
 	});
 </script>
