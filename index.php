@@ -23,7 +23,7 @@ if ( file_exists('config.php') )
 {
 	require_once 'config.php';
 
-	if ( strpos($accessToken, ' ') !== false || empty($accessToken) )
+	if ( $accessToken === null )
 	{
 		$loginRequired = true;
 
@@ -49,7 +49,7 @@ if ( file_exists('config.php') )
 
 					// Put this access token in our config file to make requests with
 					$code = file_get_contents('config.php');
-					$code = str_replace('<ACCESS TOKEN WILL BE INSERTED HERE>', $accessToken, $code);
+					$code = str_replace('$accessToken = null;', '$accessToken = \'' . $accessToken . '\';', $code);
 					file_put_contents('config.php', $code);
 					$loginRequired = false;
 				}
@@ -106,7 +106,7 @@ if ( ! $loginRequired )
 
 	$accountOptionsHTML = '<select name="account" id="account">';
 	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->item->id ); // Default to use the first account
-	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between themes quickly
+	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between accounts quickly
 	{
 		$accountOptionsHTML .= '<option value="' . $account->id . '" ' . ( $accountToUse == $account->id ? 'selected' : '' ) . '>' . $account->name . '</option>';
 
@@ -128,10 +128,9 @@ if ( ! $loginRequired )
 			$themeOptionsHTML .= '<option value="' . $theme . '" ' . ( $themeToUse == $theme ? 'selected' : '' ) . '>' . $theme . '</option>';
 		}
 	}
-	$themeOptionsHTML .= '<option value="reset">{{ reset cookie }}</option>';
+	$themeOptionsHTML .= '<option value="reset">< Reset Cookie ></option>';
 	$themeOptionsHTML .= '</select>';
-}
-?>
+} ?>
 
 		<?php if ( ! file_exists('config.php') ): ?>
 			<div class="content">
@@ -160,7 +159,7 @@ if ( ! $loginRequired )
 					<?php echo $accountOptionsHTML; ?>
 					<select id="mobile" name="mobile">
 						<option value="false">Desktop</option>
-						<option value="true">Mobile</option>
+						<option value="true" <?php echo ( isset($_COOKIE['mobile']) && filter_var($_COOKIE['mobile'], FILTER_VALIDATE_BOOLEAN) ? 'selected' : '' ); ?>>Mobile</option>
 					</select>
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>

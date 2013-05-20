@@ -2,6 +2,7 @@
 
 require_once 'config.php'; // This will have to exist in the parent frame before this iFrame is loaded
 
+// Get the account data returned by the API
 $accounts = json_decode($accountData);
 $accounts = $accounts->response->items;
 
@@ -21,12 +22,12 @@ $themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // 
 
 // Pass out theme data to the API to be rendered
 $postData = array(
-	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ),
+	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ), // The URL of the page to render
 	'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt'),
 	'css' => file_get_contents($themePath . $themeToUse . '/style.css')
 
 	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive from the API and save the bandwidth
-	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed
+	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed by the engine
 	//'css' => file_get_contents($themePath . $themeToUse . '/style.css'),
 	//'js' => file_get_contents($themePath . $themeToUse . '/javascript.js'),
 );

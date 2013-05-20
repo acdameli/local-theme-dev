@@ -25,8 +25,10 @@ $(function()
 	// Change the size of the iFrame for mobile vs non-mobile
 	$('#mobile').change(function()
 	{
+		$.cookie('mobile', $(this).val(), {expires: 30}); // Store this account ID as the one to use
 		$('#renderedTheme').toggleClass('mobile', $(this).val() === 'true');
 	})
+	$('#renderedTheme').toggleClass('mobile', $.cookie('mobile') == 'true');
 
 	// Make sure the user actually wants to update their theme
 	$('#updateTheme').submit(function()
