@@ -6,7 +6,7 @@ require_once 'config.php'; // This will have to exist in the parent frame before
 $accounts = json_decode($accountData);
 $accounts = $accounts->response->items;
 
-$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->item->id ); // Default to use the first account
+$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
 foreach ( $accounts as $account ) // Get the URL of the account we're currently looking at
 {
 	if ( $accountToUse == $account->id )

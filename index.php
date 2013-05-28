@@ -105,7 +105,8 @@ if ( ! $loginRequired )
 	$accounts = $accounts->response->items;
 
 	$accountOptionsHTML = '<select name="account" id="account">';
-	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->item->id ); // Default to use the first account
+	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
+
 	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between accounts quickly
 	{
 		$accountOptionsHTML .= '<option value="' . $account->id . '" ' . ( $accountToUse == $account->id ? 'selected' : '' ) . '>' . $account->name . '</option>';
