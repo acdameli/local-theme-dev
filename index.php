@@ -103,6 +103,7 @@ if ( ! $loginRequired )
 	// We should always have accounts by now since we populated them if the data file was empty
 	$accounts = json_decode($accountData);
 	$accounts = $accounts->response->items;
+	$accountUrl = '';
 
 	$accountOptionsHTML = '<select name="account" id="account">';
 	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
@@ -155,6 +156,7 @@ if ( ! $loginRequired )
 		<?php else: ?>
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Theming Engine Documentation &rarr;</a>
+				<a href="https://stagebloc.com/<?php echo $accountUrl; ?>/admin/management/theme/submit/upload" target="_blank">Upload Assets &rarr;</a>
 				<form method="post" action="submit_theme.php" id="updateTheme">
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>

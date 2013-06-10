@@ -14,16 +14,17 @@
 #console form { width: auto; float: right; margin: 0 40px 0 0; }
 #console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0 10px 0 0; }
 
-#console .docs {
+#console a {
 	display: block;
 	height: 50px;
 	float: left;
 	color: #686c6d;
 	text-shadow: 0 1px 0 rgba(0,0,0,.5);
 	text-decoration: none;
+	margin-right: 20px;
 }
-#console:hover .docs { color: #ccc; }
-#console .docs:hover { color: #fff; }
+#console:hover a { color: #ccc; }
+#console a:hover { color: #fff; }
 #console .docs i {
 	display: inline-block;
 	width: 42px;
