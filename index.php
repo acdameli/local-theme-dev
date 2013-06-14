@@ -91,7 +91,7 @@ if ( ! $loginRequired )
 
 			// Write this data to our config file so that we can read it later instead of retreiving it everytime
 			$code = file_get_contents('config.php');
-			$code = str_replace('null', '\'' . $accountData . '\'', $code);
+			$code = str_replace('$accountData = null', '$accountData = \'' . $accountData . '\'', $code);
 			file_put_contents('config.php', $code);
 		}
 		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
