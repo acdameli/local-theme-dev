@@ -9,7 +9,7 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 ## Requirements
 1. In order to use this for local theme development, you'll need a localhost set up capable of running PHP.
 
-2. You'll also need to [sign up for a StageBloc account](http://stagebloc.com/signup).
+2. You'll also need to [sign up for StageBloc](http://stagebloc.com/signup) and be an admin for at least one account.
 
 ## Getting Started
 
