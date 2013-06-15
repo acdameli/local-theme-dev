@@ -16,7 +16,7 @@
 
 <?php
 
-$loginRequired = false;
+$loginRequired = $error = false;
 
 // Check to see if they've configured their application
 if ( file_exists('config.php') )
@@ -55,7 +55,16 @@ if ( file_exists('config.php') )
 				}
 				catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 				{
-					die($e->getHttpBody());
+					$response = json_decode($e->getHttpBody(), true);
+					if ( $response && isset($response['response']['errors']) )
+					{
+						$errors = $response['response']['errors'];
+						$error = $errors[0];
+					}
+					else
+					{
+						die($e->getHttpBody());
+					}
 				}
 			}
 		}
@@ -146,6 +155,9 @@ if ( ! $loginRequired )
 				<header><h1><a href="" id="stagebloc-logo">StageBloc</a></h1></header>
 
 				<form method="post" autocomplete="off">
+					<?php if ( $error !== false ): ?>
+					<div class="message"><?php echo $error; ?></div>
+					<?php endif; ?>
 					<fieldset>
 						<input class="input" type="text" id="email" name="email" placeholder="Email" required />
 						<input class="input" type="password" id="password" name="password" placeholder="Password" required />
