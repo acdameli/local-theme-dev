@@ -21,6 +21,26 @@ $(function()
 			}
 		});
 	});
+	
+	$('#actions').change(function()
+	{		
+		if ( $(this).val() == 'logout' )
+		{
+			$.ajax({
+				url: 'logout.php',
+				success: function(data)
+				{
+					window.location.reload(); // Reload the page to get the login prompt back
+				}
+			});
+		}
+		else if ( $(this).val() == 'reset' )
+		{
+			$.removeCookie('account');
+			$.removeCookie('account');
+			window.location.reload();
+		}
+	});
 
 	// Change the size of the iFrame for mobile vs non-mobile
 	$('#mobile').change(function()

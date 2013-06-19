@@ -114,7 +114,7 @@ if ( ! $loginRequired )
 	$accounts = $accounts->response->items;
 	$accountUrl = '';
 
-	$accountOptionsHTML = '<select name="account" id="account">';
+	$accountOptionsHTML = '<select name="account" id="account"><optgroup label="Accounts">';
 	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
 
 	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between accounts quickly
@@ -126,11 +126,11 @@ if ( ! $loginRequired )
 			$accountUrl = $account->stagebloc_url;
 		}
 	}
-	$accountOptionsHTML .= '</select>';
+	$accountOptionsHTML .= '</optgroup></select>';
 
 	// Find all of the available themes we have
 	$themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
-	$themeOptionsHTML = '<select name="theme" id="theme">';
+	$themeOptionsHTML = '<select name="theme" id="theme"><optgroup label="Themes">';
 	$themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // Default to use the first theme
 	foreach ( $themes as $theme ) // Build a <select> drop down to use to switch between themes quickly
 	{
@@ -139,8 +139,7 @@ if ( ! $loginRequired )
 			$themeOptionsHTML .= '<option value="' . $theme . '" ' . ( $themeToUse == $theme ? 'selected' : '' ) . '>' . $theme . '</option>';
 		}
 	}
-	$themeOptionsHTML .= '<option value="reset">< Reset Cookie ></option>';
-	$themeOptionsHTML .= '</select>';
+	$themeOptionsHTML .= '</optgroup></select>';
 } ?>
 
 		<?php if ( ! file_exists('config.php') ): ?>
@@ -175,6 +174,13 @@ if ( ! $loginRequired )
 					<select id="mobile" name="mobile">
 						<option value="false">Desktop</option>
 						<option value="true" <?php echo ( isset($_COOKIE['mobile']) && filter_var($_COOKIE['mobile'], FILTER_VALIDATE_BOOLEAN) ? 'selected' : '' ); ?>>Mobile</option>
+					</select>
+					<select id="actions" name="actions">
+						<optgroup label="Actions">
+							<option value="null"></option>
+							<option value="reset">Reset Cookies</option>
+							<option value="logout">Logout</option>
+						</optgroup>
 					</select>
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>
