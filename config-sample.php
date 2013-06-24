@@ -14,6 +14,17 @@ $redirectUri = 'http://localhost';
 // Each subfolder for a theme should have at least a theme.sbt, javascript.js, and style.css file
 $themePath = './themes/';
 
+// The path to where CSS files are stored for each theme relative to the theme itself (i.e. you shouldn't need a beginning slash)
+// Each CSS file in the folder specified by the path will be added in a <link> tag at the top of the theme (folder searching isn't recursive)
+// If you use "Submit" theme, the CSS from the files in this directory will be appended into one, larger CSS dump before POSTing it to the server
+// If null, it will look for /theme_dir/style.css
+$cssPath = null;
+
+// The path to where JS files are stored for each theme relative to the theme itself (i.e. you shouldn't need a beginning slash)
+// Behaves similarily to $cssPath with regards to the other behavaviors
+// If null, it will look for /theme_dir/javascript.js
+$jsPath = null;
+
 // Once you have the other three pieces of information, this can be found by using index.php to get an access token
 // It will be placed here for you automatically once you login with your StageBloc credentials
 $accessToken = null;

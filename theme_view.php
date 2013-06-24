@@ -26,7 +26,7 @@ $postData = array(
 	'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt')
 
 	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive from the API and save the bandwidth
-	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed by the engine
+	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed by the engine. If your CSS is in seperate files, you'll need to concatenate those first
 	//'css' => file_get_contents($themePath . $themeToUse . '/style.css'),
 	//'js' => file_get_contents($themePath . $themeToUse . '/javascript.js'),
 );
@@ -38,13 +38,46 @@ try
 	// If we didn't pass the CSS, we'll append it to the rendered theme
 	if ( ! isset($postData['css']) )
 	{
-		$renderedTheme = str_replace('</head>', '<style>' . file_get_contents($themePath . $themeToUse . '/style.css') . '</style></head>', $renderedTheme);
+		if ( $cssPath !== null ) // If this var isn't null, we'll check another folder for the CSS files
+		{
+			// Add a <link> tag for each CSS file in the folder we linked to
+			$cssFiles = scandir($themePath . $themeToUse . '/' . $cssPath);
+			foreach ( $cssFiles as $cssFile )
+			{
+				if ( strpos($cssFile, '.css') !== false )
+				{
+					// This method will dump the CSS into the page itself and probably isn't very useful
+					//$renderedTheme = str_replace('</head>', '<style>' . file_get_contents($themePath . $themeToUse . '/' . $cssPath . $cssFile) . '</style></head>', $renderedTheme);
+					
+					$renderedTheme = str_replace('</head>', '<link rel="stylesheet" type="text/css" href="' . $themePath . $themeToUse . '/' . $cssPath . $cssFile . '"></head>', $renderedTheme);
+				}
+			}
+		}
+		else
+		{
+			$renderedTheme = str_replace('</head>', '<link rel="stylesheet" type="text/css" href="' . $themePath . $themeToUse . '/style.css"></head>', $renderedTheme);
+		}
 	}
 
 	// If we didn't pass the JS, we'll append it to the rendered theme
 	if ( ! isset($postData['js']) )
 	{
-		$renderedTheme = str_replace('</head>', '<script>' . file_get_contents($themePath . $themeToUse . '/javascript.js') . '</script></head>', $renderedTheme);
+		if ( $jsPath !== null ) // If this var isn't null, we'll check another folder for the JS files
+		{
+			// Add a <script> tag for each JS file in the folder we linked to
+			$jsFiles = scandir($themePath . $themeToUse . '/' . $jsPath);
+			foreach ( $jsFiles as $jsFile )
+			{
+				if ( strpos($jsFile, '.js') !== false )
+				{
+					$renderedTheme = str_replace('</head>', '<script src="' . $themePath . $themeToUse . '/' . $jsPath . $jsFile . '"></script></head>', $renderedTheme);
+				}
+			}
+		}
+		else
+		{
+			$renderedTheme = str_replace('</head>', '<script src="' . $themePath . $themeToUse . '/javascript.js"></script></head>', $renderedTheme);
+		}
 	}
 
 	// Change all the anchor tags so links render through the API instead of elsewhere
