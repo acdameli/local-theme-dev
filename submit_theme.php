@@ -48,9 +48,6 @@ if ( isset($_COOKIE['theme']) )
 		$postData['js'] = file_get_contents($themePath . $themeToUse . '/javascript.js');
 	}
 	
-	var_dump($postData);
-	die();
-
 	try
 	{
 		// Send this theme data to the API
