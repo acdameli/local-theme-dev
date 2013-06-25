@@ -25,9 +25,9 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 ## General Information
 * **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector. The `.sbt` extension is used for `HTML` files, meaning "StageBloc Theme". The theme path can be change in the `config.php` file using the `$themePath` variable.
 
-* **Theme Views**: If you don't like the idea of having the entirety of your HTML in the main `theme.sbt` file, you can use the `$themeViewsPath` config variable to structure your files a little differently. Simply set that to a folder relative to your theme and add additional `<theme_view_name>.sbt` files inside of it. Within the main `theme.sbt` file, you can now include these files in the following manner:
+* **Theme Views**: If you don't like having your entire site contained within a single `theme.sbt` file, you can create your own theme view structure using `theme.sbt` as the "manifest" (a list of .sbt files).  Set the `$themeViewsPath` config variable to a path relative to your theme, and save your `<theme_view_name>.sbt` files within that path.  The main theme.sbt file will now become your manifest, within which you can include individual views in the following manner:
 
-		{Include file="<theme_view_name>.sbt"}
+		{Include file="[ optional/path/to/ ] <theme_view_name>.sbt"}
 
 ## Feedback And Questions
 
