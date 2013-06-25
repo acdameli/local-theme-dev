@@ -14,6 +14,12 @@ $redirectUri = 'http://localhost';
 // Each subfolder for a theme should have at least a theme.sbt, javascript.js, and style.css file
 $themePath = './themes/';
 
+// The folder that may contain extra theme view files
+// Using {Include file="<theme_file_name>.sbt"} anywhere in your main theme.sbt file will include theme_file_name.sbt from this folder
+// This can be used as a way to organize your theme a bit more and not have to have all the HTML in one file
+// If null, it'll assume your entire theme is in theme.sbt
+$themeViewsPath = null;
+
 // The path to where CSS files are stored for each theme relative to the theme itself (i.e. you shouldn't need a beginning slash)
 // Each CSS file in the folder specified by the path will be added in a <link> tag at the top of the theme (folder searching isn't recursive)
 // If you use "Submit" theme, the CSS from the files in this directory will be appended into one, larger CSS dump before POSTing it to the server

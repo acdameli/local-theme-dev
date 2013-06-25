@@ -20,10 +20,32 @@ foreach ( $accounts as $account ) // Get the URL of the account we're currently 
 $themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
 $themeToUse = ( isset($_COOKIE['theme']) ? $_COOKIE['theme'] : $themes[0] ); // Default to use the first theme
 
+// Get the theme and determine if there are any includes in it
+$html = file_get_contents($themePath . $themeToUse . '/theme.sbt');
+if ( $themeViewsPath !== null )
+{
+	// Find all of the Includes inside of the theme
+	preg_match_all('#\{(Includ[^:{}"]+)(\s[^{}]+\=[^{}]*)?\}#ims', $html, $includes);
+	foreach ( $includes[0] as $key => $option_variable_string )
+	{
+		if ( preg_match_all('#([a-zA-Z]*)="([^"]*)"#', $option_variable_string, $options_matches) )
+		{
+			// For each include, find which file we should be putting in its place
+			foreach ( $options_matches[1] as $key => $option )
+			{
+				if ( strtolower($option) === 'file' )
+				{
+					$html = str_replace($option_variable_string, file_get_contents($themePath . $themeToUse . '/' . $themeViewsPath . $options_matches[2][$key]), $html);
+				}
+			}
+		}
+	}
+}
+
 // Pass out theme data to the API to be rendered
 $postData = array(
 	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ), // The URL of the page to render
-	'html' => file_get_contents($themePath . $themeToUse . '/theme.sbt')
+	'html' => $html
 
 	// We don't need to pass the CSS and JS since we can just add it in to the parsed theme we receive from the API and save the bandwidth
 	// Note: That being said, if your CSS has Option vars, you should pass it so that they are parsed by the engine. If your CSS is in seperate files, you'll need to concatenate those first
