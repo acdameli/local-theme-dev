@@ -23,7 +23,11 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 3. That's it! You can edit themes in your IDE / text editor of choice. Simply load the `index` page of this project in your browser to see your themes as you would with any localhost.
 
 ## General Information
-* **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector. The `.sbt` extension is used for `HTML` files, meaning "StageBloc Theme".
+* **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector. The `.sbt` extension is used for `HTML` files, meaning "StageBloc Theme". The theme path can be change in the `config.php` file using the `$themePath` variable.
+
+* **Theme Views**: If you don't like the idea of having the entirety of your HTML in the main `theme.sbt` file, you can use the `$themeViewsPath` config variable to structure your files a little differently. Simply set that to a folder relative to your theme and add additional `<theme_view_name>.sbt` files inside of it. Within the main `theme.sbt` file, you can now include these files in the following manner:
+
+	{Include file="<theme_view_name>.sbt"}
 
 ## Feedback And Questions
 
