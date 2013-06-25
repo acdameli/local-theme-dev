@@ -27,7 +27,7 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 
 * **Theme Views**: If you don't like the idea of having the entirety of your HTML in the main `theme.sbt` file, you can use the `$themeViewsPath` config variable to structure your files a little differently. Simply set that to a folder relative to your theme and add additional `<theme_view_name>.sbt` files inside of it. Within the main `theme.sbt` file, you can now include these files in the following manner:
 
-	{Include file="<theme_view_name>.sbt"}
+		{Include file="<theme_view_name>.sbt"}
 
 ## Feedback And Questions
 
