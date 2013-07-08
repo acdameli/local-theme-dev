@@ -119,9 +119,9 @@ if ( window.self !== window.top && history.pushState ) // Only push state if we'
 {
 	[].forEach.call(document.getElementsByTagName('a'), function(el)
 	{
-		el.addEventListener('click', function()
+		el.addEventListener('click', function(e)
 		{
-			var data = { url: '//' + location.hostname + el.href };
+			var data = { url: '//' + location.hostname + e.toElement.getAttribute('href') };
 
 			// Push the state of this to the parent so that refreshing the page loads the same page
 			parent.history.pushState(data, document.title, data.url);
