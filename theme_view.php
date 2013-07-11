@@ -71,7 +71,7 @@ try
 				{
 					// This method will dump the CSS into the page itself and probably isn't very useful
 					//$renderedTheme = str_replace('</head>', '<style>' . file_get_contents($themePath . $themeToUse . '/' . $cssPath . $cssFile) . '</style></head>', $renderedTheme);
-					
+
 					$renderedTheme = str_replace('</head>', '<link rel="stylesheet" type="text/css" href="' . $themePath . $themeToUse . '/' . $cssPath . $cssFile . '"></head>', $renderedTheme);
 				}
 			}
@@ -115,23 +115,18 @@ catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 }
 
 ?>
-
 <script>
-	$(function()
+if ( window.self !== window.top && history.pushState ) // Only push state if we're in the iframe
+{
+	[].forEach.call(document.getElementsByTagName('a'), function(el)
 	{
-		if ( window.self !== window.top ) // Only push state if we're in the iFrame
+		el.addEventListener('click', function()
 		{
-			$('a').click(function(e) {
-				var data = {
-					url: '//' + location.hostname + $(this).attr('href')
-				};
+			var data = { url: '//' + location.hostname + el.getAttribute('href') };
 
-				if ( history.pushState )
-				{
-					// Push the state of this to the parent so that refreshing the page loads the same page
-					parent.history.pushState(data, document.title, data.url);
-				}
-			});
-		}
+			// Push the state of this to the parent so that refreshing the page loads the same page
+			parent.history.pushState(data, document.title, data.url);
+		});
 	});
+}
 </script>
