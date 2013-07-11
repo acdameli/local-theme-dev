@@ -40,7 +40,11 @@ $accessToken = null;
 // So if you ever need to "reset" your login, changing both this and $accessToken back to null will force another login
 $accountData = null;
 
-$inDevelopment = false;
+// Since you're authenticated with the API, the themeing engine usually assumes there's a logged in user when rendering the theme
+// Set this to true to simulate what a logged out user would see (useful when testing fansite stuff, etc)
+$simulateLoggedOutUser = false;
+
+$inDevelopment = false; // This will basically always be false, StageBloc uses this internally
 
 // Setup our StageBloc OAuth object
 $stagebloc = new Services_StageBloc($clientId, $clientSecret, $redirectUri, $inDevelopment);

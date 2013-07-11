@@ -44,6 +44,7 @@ if ( $themeViewsPath !== null )
 
 // Pass out theme data to the API to be rendered
 $postData = array(
+	'simulate_logged_out_user' => $simulateLoggedOutUser,
 	'url' => ( isset($_GET['url']) ? $_GET['url'] : '' ), // The URL of the page to render
 	'html' => $html
 
