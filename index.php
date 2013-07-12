@@ -100,6 +100,7 @@ if ( ! $loginRequired )
 
 			// Write this data to our config file so that we can read it later instead of retreiving it everytime
 			$code = file_get_contents('config.php');
+			$accountData = str_replace('\'', '\\\'', $accountData);
 			$code = str_replace('$accountData = null', '$accountData = \'' . $accountData . '\'', $code);
 			file_put_contents('config.php', $code);
 		}

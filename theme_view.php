@@ -5,12 +5,14 @@ require_once 'config.php'; // This will have to exist in the parent frame before
 // Get the account data returned by the API
 $accounts = json_decode($accountData);
 $accounts = $accounts->response->items;
+$accountUrl = $customDomain = null;
 
 $accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
 foreach ( $accounts as $account ) // Get the URL of the account we're currently looking at
 {
 	if ( $accountToUse == $account->id )
 	{
+		$customDomain = $account->custom_domain;
 		$accountUrl = $account->stagebloc_url;
 		break;
 	}
@@ -104,7 +106,15 @@ try
 	}
 
 	// Change all the anchor tags so links render through the API instead of elsewhere
-	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
+	if ( $customDomain )
+	{
+		// If it's a custom domain, the replacement is a little bit different
+		$renderedTheme = preg_replace('#href="(http:\/\/' . $customDomain . '\/)#', 'href="?url=', $renderedTheme);
+	}
+	else
+	{
+		$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
+	}
 
 	// Output the final result
 	echo $renderedTheme;
