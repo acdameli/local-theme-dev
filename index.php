@@ -172,16 +172,14 @@ if ( ! $loginRequired )
 				<form method="post" action="submit_theme.php" id="updateTheme">
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
+					<select id="actions" name="actions">
+						<option value="null">(Actions)</option>
+						<option value="reset">Reset Cookies</option>
+						<option value="logout">Logout</option>
+					</select>
 					<select id="mobile" name="mobile">
 						<option value="false">Desktop</option>
 						<option value="true" <?php echo ( isset($_COOKIE['mobile']) && filter_var($_COOKIE['mobile'], FILTER_VALIDATE_BOOLEAN) ? 'selected' : '' ); ?>>Mobile</option>
-					</select>
-					<select id="actions" name="actions">
-						<optgroup label="Actions">
-							<option value="null"></option>
-							<option value="reset">Reset Cookies</option>
-							<option value="logout">Logout</option>
-						</optgroup>
 					</select>
 					<input class="button" type="submit" value="Submit Theme" />
 				</form>

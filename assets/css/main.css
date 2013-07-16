@@ -11,7 +11,7 @@
 	line-height: 50px;
 }
 
-#console form { width: auto; float: right; margin: 0 40px 0 0; }
+#console form { width: auto; float: right; margin: 0 40px 0 0; position: absolute; top: 0; right: 0; }
 #console select { font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0 10px 0 0; }
 
 #console a {
