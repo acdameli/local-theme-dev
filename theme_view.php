@@ -111,13 +111,9 @@ try
 		// If it's a custom domain, the replacement is a little bit different
 		$renderedTheme = preg_replace('#href="(http:\/\/' . $customDomain . '\/)#', 'href="?url=', $renderedTheme);
 	}
-	else
-	{
-		$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
-	}
-
-	// Output the final result
-	echo $renderedTheme;
+	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
+	
+	echo $renderedTheme; // Output the final result
 }
 catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 {
@@ -132,8 +128,7 @@ if ( window.self !== window.top && history.pushState ) // Only push state if we'
 	{
 		el.addEventListener('click', function()
 		{
-			var data = { url: '//' + location.hostname + el.getAttribute('href') };
-
+			var data = { url: '//' + location.hostname  + window.location.pathname.replace('theme_view.php', '') + el.getAttribute('href') };
 			// Push the state of this to the parent so that refreshing the page loads the same page
 			parent.history.pushState(data, document.title, data.url);
 		});
