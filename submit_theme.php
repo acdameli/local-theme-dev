@@ -70,18 +70,36 @@ if ( isset($_COOKIE['theme']) )
 		$postData['js'] = file_get_contents($themePath . $themeToUse . '/javascript.js');
 	}
 	
-	try
+	if ( isset($_GET['generate']) && filter_var($_GET['generate'], FILTER_VALIDATE_BOOLEAN) )
+	{ ?>
+
+<html>
+	<head></head>
+	<body>
+		You can copy and paste the following text into files to have your entire theme...<br/>
+		<a href="index.php">Back To Theme Development</a><br/>
+		<textarea rows="20" cols="100" readonly><?php echo htmlspecialchars($postData['html']); ?></textarea><br/>
+		<textarea rows="20" cols="100" readonly><?php echo htmlspecialchars($postData['css']); ?></textarea><br/>
+		<textarea rows="20" cols="100" readonly><?php echo htmlspecialchars($postData['js']); ?></textarea>
+	</body>
+</html>
+
+	<? }
+	else
 	{
-		// Send this theme data to the API
-		$response = $stagebloc->post('theme/edit', $postData);
+		try
+		{
+			// Send this theme data to the API
+			//$response = $stagebloc->post('theme/edit', $postData);
+		}
+		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
+		{
+			die($e->getHttpBody());
+		}
+
+		header('Location: index.php'); // Redirect back to the editor
+		exit;
 	}
-	catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
-	{
-		die($e->getHttpBody());
-	}
-	
-	header('Location: index.php'); // Redirect back to the editor
-	exit;
 }
 
 ?>

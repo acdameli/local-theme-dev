@@ -175,6 +175,7 @@ if ( ! $loginRequired )
 					<select id="actions" name="actions">
 						<option value="null">(Actions)</option>
 						<option value="reset">Reset Cookies</option>
+						<option value="generate">Generate Theme</option>
 						<option value="logout">Logout</option>
 					</select>
 					<select id="mobile" name="mobile">

@@ -40,6 +40,12 @@ $(function()
 			$.removeCookie('account');
 			window.location.reload();
 		}
+		else if ( $(this).val() == 'generate' )
+		{
+			var form = $(this).parents('form');
+			form.attr('action', form.attr('action') + '?generate=1');
+			form.submit();
+		}
 	});
 
 	// Change the size of the iFrame for mobile vs non-mobile
@@ -53,6 +59,9 @@ $(function()
 	// Make sure the user actually wants to update their theme
 	$('#updateTheme').submit(function()
 	{
-		return confirm('Are you sure you want to update your theme?');
+		if ( $(this).attr('action').indexOf('generate=1') == -1 )
+		{
+			return confirm('Are you sure you want to update your theme?');
+		}
 	});
 });
