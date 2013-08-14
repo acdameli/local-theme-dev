@@ -5,7 +5,7 @@ require_once 'config.php';
 if ( isset($_COOKIE['theme']) )
 {
 	$themeToUse = $_COOKIE['theme'];
-	
+
 	// Get the HTML to pass along to the API
 	$html = file_get_contents($themePath . $themeToUse . '/theme.sbt');
 	if ( $themeViewsPath !== null )
@@ -27,13 +27,13 @@ if ( isset($_COOKIE['theme']) )
 			}
 		}
 	}
-	
+
 	// Pass out theme data to the API to be rendered
 	$postData = array(
 		'html' => $html,
 		'mobile' => filter_var($_POST['mobile'], FILTER_VALIDATE_BOOLEAN)
 	);
-	
+
 	if ( $cssPath !== null ) // If this var isn't null, we'll check another folder for the CSS files
 	{
 		$css = '';
@@ -51,7 +51,7 @@ if ( isset($_COOKIE['theme']) )
 	{
 		$postData['css'] = file_get_contents($themePath . $themeToUse . '/style.css');
 	}
-	
+
 	if ( $jsPath !== null ) // If this var isn't null, we'll check another folder for the CSS files
 	{
 		$js = '';
@@ -69,7 +69,7 @@ if ( isset($_COOKIE['theme']) )
 	{
 		$postData['js'] = file_get_contents($themePath . $themeToUse . '/javascript.js');
 	}
-	
+
 	if ( isset($_GET['generate']) && filter_var($_GET['generate'], FILTER_VALIDATE_BOOLEAN) )
 	{ ?>
 
@@ -84,7 +84,7 @@ if ( isset($_COOKIE['theme']) )
 	</body>
 </html>
 
-	<? }
+	<?php }
 	else
 	{
 		try
