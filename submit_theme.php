@@ -90,7 +90,7 @@ if ( isset($_COOKIE['theme']) )
 		try
 		{
 			// Send this theme data to the API
-			//$response = $stagebloc->post('theme/edit', $postData);
+			$response = $stagebloc->post('theme/edit', $postData);
 		}
 		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 		{
