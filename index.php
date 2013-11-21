@@ -112,22 +112,28 @@ if ( ! $loginRequired )
 
 	// We should always have accounts by now since we populated them if the data file was empty
 	$accounts = json_decode($accountData);
-	$accounts = $accounts->response->items;
-	$accountUrl = '';
+    $accountOptionsHTML = '<select name="account" id="account"><optgroup label="Accounts">';
+    if ( $accounts )
+    {
+        $accounts = $accounts->response->items;
+        $accountUrl = '';
 
-	$accountOptionsHTML = '<select name="account" id="account"><optgroup label="Accounts">';
-	$accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
+        $accountToUse = ( isset($_COOKIE['account']) ? $_COOKIE['account'] : $accounts[0]->id ); // Default to use the first account
+        foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between accounts quickly
+        {
+            $accountOptionsHTML .= '<option value="' . $account->id . '" ' . ( $accountToUse == $account->id ? 'selected' : '' ) . '>' . $account->name . '</option>';
 
-	foreach ( $accounts as $account ) // Build a <select> drop down to use to switch between accounts quickly
-	{
-		$accountOptionsHTML .= '<option value="' . $account->id . '" ' . ( $accountToUse == $account->id ? 'selected' : '' ) . '>' . $account->name . '</option>';
-
-		if ( $accountToUse == $account->id )
-		{
-			$accountUrl = $account->stagebloc_url;
-		}
-	}
-	$accountOptionsHTML .= '</optgroup></select>';
+            if ( $accountToUse == $account->id )
+            {
+                $accountUrl = $account->stagebloc_url;
+            }
+        }
+    }
+    else
+    {
+        $accountOptionsHTML .= '<option>Please refresh your browser</option>';
+    }
+    $accountOptionsHTML .= '</optgroup></select>';
 
 	// Find all of the available themes we have
 	$themes = array_values(preg_grep('/^([^.])/', scandir($themePath))); // Ignore hidden files
