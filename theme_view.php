@@ -112,7 +112,7 @@ try
 		$renderedTheme = preg_replace('#href="(http:\/\/' . $customDomain . '\/)#', 'href="?url=', $renderedTheme);
 	}
 	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
-	
+
 	echo $renderedTheme; // Output the final result
 }
 catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )

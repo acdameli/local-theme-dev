@@ -70,8 +70,7 @@ if ( isset($_COOKIE['theme']) )
 		$postData['js'] = file_get_contents($themePath . $themeToUse . '/javascript.js');
 	}
 
-	if ( isset($_GET['generate']) && filter_var($_GET['generate'], FILTER_VALIDATE_BOOLEAN) )
-	{ ?>
+	if ( isset($_GET['generate']) && filter_var($_GET['generate'], FILTER_VALIDATE_BOOLEAN) ): ?>
 
 <html>
 	<head></head>
@@ -84,9 +83,7 @@ if ( isset($_COOKIE['theme']) )
 	</body>
 </html>
 
-	<?php }
-	else
-	{
+	<?php else:
 		try
 		{
 			// Send this theme data to the API
@@ -97,9 +94,10 @@ if ( isset($_COOKIE['theme']) )
 			die($e->getHttpBody());
 		}
 
-		header('Location: index.php'); // Redirect back to the editor
-		exit;
-	}
+		exit(header('Location: index.php')); // Redirect back to the editor
+	endif;
 }
-
-?>
+else
+{
+    die('No theme cookie set! Try switching themes to a different one and then back.');
+}
