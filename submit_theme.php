@@ -28,7 +28,6 @@ if ( isset($_COOKIE['theme']) )
 		}
 	}
 
-	// Pass out theme data to the API to be rendered
 	$postData = array(
 		'html' => $html,
 		'mobile' => filter_var($_POST['mobile'], FILTER_VALIDATE_BOOLEAN)
@@ -51,6 +50,11 @@ if ( isset($_COOKIE['theme']) )
 	{
 		$postData['css'] = file_get_contents($themePath . $themeToUse . '/style.css');
 	}
+
+    if ( strpos($postData['css'], '@') === 0 )
+    {
+        die('The first character in your CSS is an "@". For some reason, this breaks submitting the theme. If you\'d like to help fix this, please see here: https://github.com/stagebloc/local-theme-dev/issues/8');
+    }
 
 	if ( $jsPath !== null ) // If this var isn't null, we'll check another folder for the CSS files
 	{
@@ -86,12 +90,11 @@ if ( isset($_COOKIE['theme']) )
 	<?php else:
 		try
 		{
-			// Send this theme data to the API
-			$response = $stagebloc->post('theme/edit', $postData);
+			$stagebloc->post('theme/edit', $postData);
 		}
 		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 		{
-			die($e->getHttpBody());
+			die('Error: ' . $e->getHttpBody());
 		}
 
 		exit(header('Location: index.php')); // Redirect back to the editor

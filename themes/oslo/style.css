@@ -1005,7 +1005,7 @@ p {
 .jp-controls { list-style: none; }
 .jp-controls li { display: block; float: left; margin: 0 5px 0 0; }
 .jp-controls li a { display: block; outline: none; padding: 10px; height: 14px; }
-.jp-controls li a span { display: block; background-image: url(http://cdn.stagebloc.com/production/themes/assets/1/jplayer.png); text-indent: -9999em; }
+.jp-controls li a span { display: block; background-image: url(http://sc2.cdn-stagebloc.com/images/fallback/jplayer.png); text-indent: -9999em; }
 .jp-previous span { margin-top: 3px; width: 13px; height: 8px; background-position: 0 -28px; }
 .jp-previous:hover span { background-position: -17px -28px; }
 .jp-play span { width: 12px; height: 14px; background-position: 0 0;}
