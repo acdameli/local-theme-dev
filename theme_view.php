@@ -116,7 +116,7 @@ try
 	if ( $customDomain )
 	{
 		// If it's a custom domain, the replacement is a little bit different
-		$renderedTheme = preg_replace('#href="(http:\/\/' . $customDomain . '\/)#', 'href="?url=', $renderedTheme);
+		$renderedTheme = preg_replace('#href="(http:\/\/(?:www\.)?' . $customDomain . '\/?)#', 'href="?url=', $renderedTheme);
 	}
 	$renderedTheme = preg_replace('#href="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', 'href="?url=', $renderedTheme);
 
