@@ -46,6 +46,9 @@ $simulateLoggedOutUser = false;
 
 $inDevelopment = false; // This will basically always be false, StageBloc uses this internally
 
+// These files should not be included in the page or submitted to the theme
+$jsFileBlacklist = ['gulpfile.js', 'Gruntfile.js'];
+
 // Setup our StageBloc OAuth object
 $stagebloc = new Services_StageBloc($clientId, $clientSecret, $redirectUri, $inDevelopment);
 $stagebloc->setAccessToken($accessToken);

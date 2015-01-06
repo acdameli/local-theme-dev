@@ -76,7 +76,7 @@ try
 			$cssFiles = scandir($themePath . $themeToUse . '/' . $cssPath);
 			foreach ( $cssFiles as $cssFile )
 			{
-				if ( strpos($cssFile, '.css') !== false )
+				if ( preg_match('/\.css$/', $cssFile) )
 				{
 					// This method will dump the CSS into the page itself and probably isn't very useful
 					//$renderedTheme = str_replace('</head>', '<style>' . file_get_contents($themePath . $themeToUse . '/' . $cssPath . $cssFile) . '</style></head>', $renderedTheme);
@@ -100,7 +100,7 @@ try
 			$jsFiles = scandir($themePath . $themeToUse . '/' . $jsPath);
 			foreach ( $jsFiles as $jsFile )
 			{
-				if ( strpos($jsFile, '.js') !== false )
+				if ( preg_match('/\.js$/', $jsFile) && ! in_array($jsFile, $jsFileBlacklist) )
 				{
 					$renderedTheme = str_replace('</head>', '<script src="' . $themePath . $themeToUse . '/' . $jsPath . $jsFile . '"></script></head>', $renderedTheme);
 				}
