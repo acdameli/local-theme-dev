@@ -39,7 +39,7 @@ if ( isset($_COOKIE['theme']) )
 		$cssFiles = scandir($themePath . $themeToUse . '/' . $cssPath);
 		foreach ( $cssFiles as $cssFile )
 		{
-			if ( strpos($cssFile, '.css') !== false )
+			if ( preg_match('/\.css$/', $cssFile) )
 			{
 				$css .= file_get_contents($themePath . $themeToUse . '/' . $cssPath . $cssFile);
 			}
@@ -62,7 +62,7 @@ if ( isset($_COOKIE['theme']) )
 		$jsFiles = scandir($themePath . $themeToUse . '/' . $jsPath);
 		foreach ( $jsFiles as $jsFile )
 		{
-			if ( strpos($jsFile, '.js') !== false )
+			if ( preg_match('/\.js$/', $jsFile) && ! in_array($jsFile, $jsFileBlacklist) )
 			{
 				$js .= file_get_contents($themePath . $themeToUse . '/' . $jsPath . $jsFile);
 			}
