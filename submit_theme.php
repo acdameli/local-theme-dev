@@ -53,7 +53,7 @@ if ( isset($_COOKIE['theme']) )
 
     if ( strpos($postData['css'], '@') === 0 )
     {
-        die('The first character in your CSS is an "@". For some reason, this breaks submitting the theme. If you\'d like to help fix this, please see here: https://github.com/stagebloc/local-theme-dev/issues/8');
+        $postData['css'] = ' ' . $postData['css'];
     }
 
 	if ( $jsPath !== null ) // If this var isn't null, we'll check another folder for the CSS files
