@@ -174,7 +174,7 @@ if ( ! $loginRequired )
 		<?php else: ?>
 			<div id="console">
 				<a href="http://stagebloc.com/developers/theming" target="_blank" class="docs"><i></i>Documentation</a>
-				<a href="https://stagebloc.com/<?php echo $accountUrl; ?>/admin/management/theme/submit/upload" target="_blank">Upload Assets</a>
+				<a href="https://stagebloc.com/<?php echo $accountUrl; ?>/admin/settings/site/assets" target="_blank">Upload Assets</a>
 				<form method="post" action="submit_theme.php" id="updateTheme">
 					<?php echo $themeOptionsHTML; ?>
 					<?php echo $accountOptionsHTML; ?>
