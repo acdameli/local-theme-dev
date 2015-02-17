@@ -86,7 +86,7 @@ if ( ! $loginRequired )
 		{
 			$accountData = $stagebloc->post('accounts/list', array());
 
-			// Set the original authenicated account to the one authenciated by the API endpoint
+			// Set the original authenticated account to the one authenticated by the API endpoint
 			$accounts = json_decode($accountData);
 			$accounts = $accounts->response->items;
 			foreach ( $accounts as $account )
@@ -98,7 +98,7 @@ if ( ! $loginRequired )
 				}
 			}
 
-			// Write this data to our config file so that we can read it later instead of retreiving it everytime
+			// Write this data to our config file so that we can read it later instead of retrieving it every time
 			$code = file_get_contents('config.php');
 			$accountData = str_replace('\'', '\\\'', $accountData);
 			$code = str_replace('$accountData = null', '$accountData = \'' . $accountData . '\'', $code);

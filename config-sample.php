@@ -3,7 +3,7 @@
 require_once 'php-stagebloc-api/StageBloc.php';
 
 // These three pieces of information can be found be creating an Application on StageBloc
-// In this case, the application has already been created by your friends at Stagebloc, you just need to authenticate with it
+// In this case, the application has already been created by your friends at StageBloc, you just need to authenticate with it
 // If for any reason you need to use a different redirect URL, you can easily create your own application on StageBloc and use that instead
 $clientId = '840c1d25a765312f1be2ec4a6167f0d8';
 $clientSecret = 'f21789142cc2a76d5e93b29eae70c482';
@@ -27,7 +27,7 @@ $themeViewsPath = null;
 $cssPath = null;
 
 // The path to where JS files are stored for each theme relative to the theme itself (i.e. you shouldn't need a beginning slash)
-// Behaves similarily to $cssPath with regards to the other behavaviors
+// Behaves similarily to $cssPath with regards to the other behaviors
 // If null, it will look for /theme_dir/javascript.js
 $jsPath = null;
 
@@ -40,8 +40,8 @@ $accessToken = null;
 // So if you ever need to "reset" your login, changing both this and $accessToken back to null will force another login
 $accountData = null;
 
-// Since you're authenticated with the API, the themeing engine usually assumes there's a logged in user when rendering the theme
-// Set this to true to simulate what a logged out user would see (useful when testing fansite stuff, etc)
+// Since you're authenticated with the API, the theming engine usually assumes there's a logged in user when rendering the theme
+// Set this to true to simulate what a logged out user would see (useful when testing fan club stuff, etc)
 $simulateLoggedOutUser = false;
 
 $inDevelopment = false; // This will basically always be false, StageBloc uses this internally
