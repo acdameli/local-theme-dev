@@ -18,6 +18,11 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 		git submodule init
 		git submodule update
 
+	1a. We've noticed issues may occur sometimes on Windows (or with WAMP) where the cURL requests made by the PHP API wrapper have SSL authentication issues. In that case you can add the following lines to `StageBloc.php` in the `_request()` method:
+	
+		$options[CURLOPT_SSL_VERIFYPEER] = false;
+		$options[CURLOPT_SSL_VERIFYHOST] = false;
+        	
 2. Rename `config-sample.php` to `config.php` and run `chmod 777 config.php` so that we can populate it with your access token upon authentication and other data.
 
 3. That's it! You can edit themes in your IDE / text editor of choice. Simply load the `index` page of this project in your browser to see your themes as you would with any localhost.
