@@ -102,7 +102,10 @@ if ( ! $loginRequired )
 			$code = file_get_contents('config.php');
 			$accountData = str_replace('\'', '\\\'', $accountData);
 			$code = str_replace('$accountData = null', '$accountData = \'' . $accountData . '\'', $code);
-			file_put_contents('config.php', $code);
+			if ( false === file_put_contents('config.php', $code) )
+			{
+				die('Login data could not be written to config file, please make sure it has the right permissions set');
+			}
 		}
 		catch ( Services_StageBloc_Invalid_Http_Response_Code_Exception $e )
 		{
