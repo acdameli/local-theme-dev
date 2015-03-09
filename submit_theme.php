@@ -2,6 +2,28 @@
 
 require_once 'config.php';
 
+function recursiveTemplateInclude($html, $path) {
+	// Find all of the Includes inside of the theme
+	preg_match_all('#\{(Includ[^:{}"]+)(\s[^{}]+\=[^{}]*)?\}#ims', $html, $includes);
+	foreach ( $includes[0] as $key => $option_variable_string )
+	{
+		if ( preg_match_all('#([a-zA-Z]*)="([^"]*)"#', $option_variable_string, $options_matches) )
+		{
+			// For each include, find which file we should be putting in its place
+			foreach ( $options_matches[1] as $key => $option )
+			{
+				if ( strtolower($option) === 'file' )
+				{
+					$included_template = recursiveTemplateInclude(file_get_contents($path . $options_matches[2][$key]), $path);
+					$html = str_replace($option_variable_string, $included_template, $html);
+				}
+			}
+		}
+	}
+
+	return $html;
+}
+
 if ( isset($_COOKIE['theme']) )
 {
 	$themeToUse = $_COOKIE['theme'];
@@ -10,22 +32,7 @@ if ( isset($_COOKIE['theme']) )
 	$html = file_get_contents($themePath . $themeToUse . '/theme.sbt');
 	if ( $themeViewsPath !== null )
 	{
-		// Find all of the Includes inside of the theme
-		preg_match_all('#\{(Includ[^:{}"]+)(\s[^{}]+\=[^{}]*)?\}#ims', $html, $includes);
-		foreach ( $includes[0] as $key => $option_variable_string )
-		{
-			if ( preg_match_all('#([a-zA-Z]*)="([^"]*)"#', $option_variable_string, $options_matches) )
-			{
-				// For each include, find which file we should be putting in its place
-				foreach ( $options_matches[1] as $key => $option )
-				{
-					if ( strtolower($option) === 'file' )
-					{
-						$html = str_replace($option_variable_string, file_get_contents($themePath . $themeToUse . '/' . $themeViewsPath . $options_matches[2][$key]), $html);
-					}
-				}
-			}
-		}
+		$html = recursiveTemplateInclude($html, $themePath . $themeToUse . '/' . $themeViewsPath);
 	}
 
 	$postData = array(
