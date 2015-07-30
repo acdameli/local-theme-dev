@@ -118,7 +118,7 @@ try
 		// If it's a custom domain, the replacement is a little bit different
 		$renderedTheme = preg_replace('#(href|action)="(http:\/\/(?:www\.)?' . $customDomain . '\/?)#', '$1="?url=', $renderedTheme);
 	}
-	$renderedTheme = preg_replace('#(href|action)="((http:\/\/stagebloc\..+)?\/' . $accountUrl . '\/)#', '$1="?url=', $renderedTheme);
+	$renderedTheme = preg_replace('#(href|action)="((http:\/\/stagebloc\..+?)?\/' . $accountUrl . '\/)#', '$1="?url=', $renderedTheme);
 
 	echo $renderedTheme; // Output the final result
 }
