@@ -26,7 +26,7 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 2. Rename `config-sample.php` to `config.php` and run `chmod 777 config.php` so that we can populate it with your access token upon authentication and other data.
 
 3. You can edit themes in your IDE / text editor of choice.
-4. Run a local server by typing `sudo php -S localhost:7252` (linux or OSX). This requires you have php version 5.4.0 or newer installed.
+4. Run a local server by typing `php -S localhost:7252` (linux or OSX). This requires you have php version 5.4.0 or newer installed.
 5. Simply load `http://localhost:7252/` in your browser and log in using your StageBloc account to see your themes.
 
 ## General Information
