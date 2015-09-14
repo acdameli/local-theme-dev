@@ -27,7 +27,7 @@ This codebase makes use of our [StageBloc PHP API Wrapper](https://github.com/st
 
 3. You can edit themes in your IDE / text editor of choice.
 4. Run a local server by typing `sudo php -S localhost:7252` (linux or OSX). This requires you have php version 5.4.0 or newer installed.
-5. Simply load `http://localhost:7252/` in your browser to see your themes.
+5. Simply load `http://localhost:7252/` in your browser and log in using your StageBloc account to see your themes.
 
 ## General Information
 * **Adding themes**: Themes are stored in the `/themes/` directory. Simply add a folder there with an `HTML`, `CSS`, and `JS` file to populate your new theme in the dropdown selector. The `.sbt` extension is used for `HTML` files, meaning "StageBloc Theme". The theme path can be change in the `config.php` file using the `$themePath` variable.
